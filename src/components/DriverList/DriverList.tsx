@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import DriverItem from "./DriverListItem/DriverListItem";
-import Modal from "../modal/Modal";
+import Modal from "../Modal/Modal";
 import styles from "./DriverList.module.scss";
 import sprite from "../../icons/symbol-defs.svg";
 

@@ -1,10 +1,11 @@
 import React from 'react';
-import BreadcrambsCars from '../Breadcrambs/BreadcrambsCars';
+import BreadcrambsCars from '../../components/Breadcrambs/BreadcrambsCars';
+import CarList from '../../components/CarsList/CarList';
 function Cars(): JSX.Element {
     return (
         <>
         <BreadcrambsCars/>
-        <h2>Привет от машин</h2>
+        <CarList/>
         </>
         
     );

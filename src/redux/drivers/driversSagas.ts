@@ -41,7 +41,7 @@ export async function fetchDriversApi(): Promise<IDriver[]> {
 }
 
 export function* fetchDriversWorker() {
-  try {
+  try { 
     const drivers = (yield call(fetchDriversApi)) as IDriver[];
     yield put(fetchDrivers(drivers));
   } catch (error) {}

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import CarItem from "./CarsListItem/CarListItem";
 import styles from "./CarList.module.scss";
-import Modal from "../modal/Modal";
+import Modal from "../Modal/Modal";
 import sprite from "../../icons/symbol-defs.svg";
 
 const CarList = () => {
