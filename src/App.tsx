@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getDrivers } from './redux/drivers/driversSelectors';
 import {fetchDriversWorker, fetchDriversApi} from './redux/drivers/driversSagas';
 import {fetchDrivers} from './redux/drivers/driversActions';
+import Main from "./components/main/Main";
 
 function App() {
   const dispatch = useDispatch()
@@ -12,9 +13,10 @@ function App() {
 
   return (
     <>
-      <h1>Home</h1>
+      <Main/>
     </>
   );
+
 }
 
 export default App;
