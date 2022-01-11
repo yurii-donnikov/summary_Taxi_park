@@ -1,20 +1,11 @@
-import { put, call, takeEvery } from 'redux-saga/effects';
+import { put, call, takeEvery, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-import {
-  FETCH_DRIVERS,
-  CREATE_DRIVER,
-  DELETE_DRIVER,
-  UPDATE_DRIVER,
-  FETCH_DRIVER_STATUSES,
-} from './driversTypes';
+import * as type from './driversTypes';
 
 import {
-  fetchDrivers,
-  createDriver,
-  deleteDriver,
-  updateDriver,
-  fetchStatusesDriver,
+  fetchDriversSuccess,
+  
 } from './driversActions';
 
 axios.defaults.baseURL = 'https://edu.evgeniychvertkov.com/v1';
@@ -25,8 +16,8 @@ interface IDriver {
   id?: number;
   first_name: string;
   last_name: string;
-  date_created?: number;
   date_birth: number;
+  date_created?: number;
   status: {
     title: string;
     code: string;
@@ -43,10 +34,11 @@ export async function fetchDriversApi(): Promise<IDriver[]> {
 export function* fetchDriversWorker() {
   try { 
     const drivers = (yield call(fetchDriversApi)) as IDriver[];
-    yield put(fetchDrivers(drivers));
+    yield put(fetchDriversSuccess(drivers));
   } catch (error) {}
 }
 
 export function* driversWatcher() {
-  yield takeEvery(FETCH_DRIVERS, fetchDriversWorker);
+  yield takeLatest(type.FETCH_DRIVERS_REQUEST, fetchDriversWorker);
+  
 }
