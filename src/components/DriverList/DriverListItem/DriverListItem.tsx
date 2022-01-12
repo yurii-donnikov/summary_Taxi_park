@@ -1,63 +1,81 @@
-import React, { useState } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import drivers from '../../driverBase/DriverBase';
 import styles from '../DriverList.module.scss';
 import sprite from '../../../icons/symbol-defs.svg';
 import Modal from '../../Modal/Modal';
+import FormDriver from '../../Form/FormDrivers';
+import FormCar from '../../Form/FormCars';
+
 
 const DriverItem = () => {
   const [modalActive, setModalActive] = useState(false);
+  const [formType, setFormType] = useState(false);
+  const [type, setType] = useState(false);
 
+  const renderModalDriver = () =>{
+    setModalActive(true);
+    setFormType(false);
+    setType(true);
+  }
+  
   const renderModalCar = () => {
     setModalActive(true);
+    setFormType(true);
   };
+
   return (
     <>
       {drivers.map(driver => (
         <li key={driver.id} className={styles.data_list}>
           <p>
-            <strong>{driver.id}</strong>
+            {driver.id}
           </p>
           <p>
-            <strong>{driver.full_name}</strong>
+            {driver.first_name+' '}
+            {driver.last_name}
           </p>
           <p>
-            <strong>{driver.date_birth}</strong>
+            {driver.date_birth}
           </p>
           <p>
-            <strong>{driver.registration}</strong>
+            {driver.date_created}
           </p>
-
-          <select name="status">
-            <option>{driver.status.title}</option>
-            <option value="active">Активен</option>
-            <option value="inactive">Неактивен</option>
-            <option value="blocked">Заблокирован</option>
-          </select>
+          <p>
+            {driver.status.title}
+          </p>
 
           <div>
-            <button onClick={() => renderModalCar()}>
-              <svg className={styles.icon}>
+            <button className={styles.ico__btn} onClick={renderModalDriver} >
+              <svg className={styles.icon} >
                 <use href={sprite + '#icon-TypeEdit'} />
               </svg>
             </button>
 
-            <button>
+            <button className={styles.ico__btn}>
               <svg className={styles.icon}>
                 <use href={sprite + '#icon-TypeWatch'} />
               </svg>
             </button>
 
-            <button>
+            <button className={styles.ico__btn}>
               <svg className={styles.icon}>
                 <use href={sprite + '#icon-TypeDendie'} />
               </svg>
             </button>
           </div>
 
-          <p></p>
+          <button data-value={'car'} className={styles.car__btn}
+            onClick={renderModalCar}>
+            <svg className={styles.icon__create}>
+                <use href={sprite + "#icon-TypeAdd"}/>
+            </svg>
+            <p>Авто</p>
+          </button>
         </li>
       ))}
-      <Modal active={modalActive} setActive={setModalActive} />
+      <Modal active={modalActive} setActive={setModalActive}>
+            {formType ? (<FormCar/>) : (<FormDriver active={type} />)}
+      </Modal>
     </>
   );
 };
