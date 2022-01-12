@@ -1,4 +1,4 @@
-export interface IStatus {
+export interface IDriverStatus {
   title: string;
   code: string;
 }
@@ -9,15 +9,15 @@ export interface IDriver {
   last_name: string;
   date_created: number;
   date_birth: number;
-  status: IStatus;
+  status: IDriverStatus;
 }
 
-export interface IAction<T> {
-  type: string;
-  payload: T;
-}
+// export interface IAction<T> {
+//   type: string;
+//   payload: T;
+// }
 
 export interface IDriversState {
   drivers: IDriver[];
-  statuses: IStatus[];
+  statuses: IDriverStatus[];
 }

@@ -5,17 +5,20 @@ import Modal from '../../Modal/Modal';
 import FormDriver from '../../Form/FormDrivers';
 import FormCar from '../../Form/FormCars';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDriversRequest } from '../../../redux/drivers/driversActions';
+import {
+  deleteDriverRequest,
+  fetchDriversRequest,
+} from '../../../redux/drivers/driversActions';
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
+import { deleteDriver } from '../../apiService/apiDrivers';
 
 const DriverItem = () => {
   const dispatch = useDispatch();
+  const drivers = useSelector(getDrivers);
 
   useEffect(() => {
     dispatch(fetchDriversRequest());
   }, [dispatch]);
-
-  const drivers = useSelector(getDrivers);
 
   const [modalActive, setModalActive] = useState(false);
   const [formType, setFormType] = useState(false);
@@ -30,6 +33,14 @@ const DriverItem = () => {
   const renderModalCar = () => {
     setModalActive(true);
     setFormType(true);
+  };
+
+  const handlerDeleteBtn = (event: any) => {
+    const driverId = event.currentTarget.id;
+
+    deleteDriver(driverId);
+
+    dispatch(deleteDriverRequest());
   };
 
   return (
@@ -58,7 +69,11 @@ const DriverItem = () => {
               </svg>
             </button>
 
-            <button className={styles.ico__btn}>
+            <button
+              id={driver.id.toString()}
+              onClick={handlerDeleteBtn}
+              className={styles.ico__btn}
+            >
               <svg className={styles.icon}>
                 <use href={sprite + '#icon-TypeDendie'} />
               </svg>
