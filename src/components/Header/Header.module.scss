@@ -101,3 +101,10 @@ header {
     }
   }
 }
+.icon {
+  width: 18px;
+  height: 18px;
+}
+.icon:nth-child(2){
+  color: black;
+}
