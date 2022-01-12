@@ -1,52 +1,43 @@
-import { put, call, takeEvery } from 'redux-saga/effects';
-import axios from 'axios';
-
+import { put, call, takeLatest } from 'redux-saga/effects';
+import * as type from './driversTypes';
 import {
-  FETCH_DRIVERS,
-  CREATE_DRIVER,
-  DELETE_DRIVER,
-  UPDATE_DRIVER,
-  FETCH_DRIVER_STATUSES,
-} from './driversTypes';
-
-import {
-  fetchDrivers,
-  createDriver,
-  deleteDriver,
-  updateDriver,
-  fetchStatusesDriver,
+  deleteDriverError,
+  deleteDriverRequest,
+  deleteDriverSuccess,
+  fetchDriversError,
+  fetchDriversRequest,
+  fetchDriversSuccess,
 } from './driversActions';
+import { IDriver } from '../../interfaces/driversInterfaces';
+import {
+  deleteDriver,
+  fetchDrivers,
+} from '../../components/apiService/apiDrivers';
 
-axios.defaults.baseURL = 'https://edu.evgeniychvertkov.com/v1';
-axios.defaults.headers.common['X-Authorization'] =
-  'apie05b4a902436848782d6f233ae1715330c0f4d52e4efa41e315378e5256bf7d3';
-
-interface IDriver {
-  id?: number;
-  first_name: string;
-  last_name: string;
-  date_created?: number;
-  date_birth: number;
-  status: {
-    title: string;
-    code: string;
-  };
+interface IParams<T> {
+  type: string;
+  payload: T;
 }
 
-export async function fetchDriversApi(): Promise<IDriver[]> {
-  const response = await axios.get('/driver/');
-  const { data }: { data: IDriver[] } = response.data;
-
-  return data;
+function* fetchDriversWorker() {
+  try {
+    const drivers = (yield call(fetchDrivers)) as IDriver[];
+    yield put(fetchDriversSuccess(drivers));
+  } catch (error) {
+    yield put(fetchDriversError(error));
+  }
 }
 
-export function* fetchDriversWorker() {
-  try { 
-    const drivers = (yield call(fetchDriversApi)) as IDriver[];
-    yield put(fetchDrivers(drivers));
-  } catch (error) {}
+function* deleteDriverWorker<T extends number>({ payload }: IParams<T>) {
+  try {
+    yield call(deleteDriver, payload);
+    yield put(deleteDriverSuccess(payload));
+  } catch (error) {
+    yield deleteDriverError(error);
+  }
 }
 
 export function* driversWatcher() {
-  yield takeEvery(FETCH_DRIVERS, fetchDriversWorker);
+  yield takeLatest(type.FETCH_DRIVERS_REQUEST, fetchDriversWorker);
+  yield takeLatest(type.DELETE_DRIVER_REQUEST, deleteDriverWorker);
 }

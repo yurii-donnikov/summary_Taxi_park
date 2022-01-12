@@ -1,63 +1,20 @@
+import * as type from './driversTypes';
 import {
-  FETCH_DRIVERS,
-  CREATE_DRIVER,
-  DELETE_DRIVER,
-  UPDATE_DRIVER,
-  FETCH_DRIVER_STATUSES,
-} from './driversTypes';
-
-interface IStatus {
-  title: string;
-  code: string;
-}
-
-interface IDriver {
-  id: number;
-  first_name: string;
-  last_name: string;
-  date_created: number;
-  date_birth: number;
-  status: IStatus;
-}
-
-interface IDriversState {
-  drivers: IDriver[];
-  statuses: IStatus[];
-}
-
-const initialState: IDriversState = {
-  drivers: [
-    {
-      id: 1,
-      first_name: 'Bob',
-      last_name: 'Marvel',
-      date_created: 1641398211000,
-      date_birth: 1236548000,
-      status: {
-        title: 'Активный',
-        code: 'active',
-      },
-    },
-    {
-      id: 2,
-      first_name: 'Jon',
-      last_name: 'Jonson',
-      date_created: 1641398777000,
-      date_birth: 1356897000,
-      status: {
-        title: 'Заблокирован',
-        code: 'blocked',
-      },
-    },
-  ],
-  statuses: [],
-};
-
+  IDriversState,
+  IDriver,
+  IDriverStatus,
+} from '../../interfaces/driversInterfaces';
 interface IAction<T> {
   type: string;
   payload: T;
 }
-type TReducer = IDriver & IDriver[] & IStatus[];
+
+type TReducer = IDriver & IDriver[] & IDriverStatus[];
+
+const initialState: IDriversState = {
+  drivers: [],
+  statuses: [],
+};
 
 const driversReducer = <T extends TReducer>(
   state: IDriversState,
@@ -66,16 +23,23 @@ const driversReducer = <T extends TReducer>(
   state = state || initialState;
 
   switch (action.type) {
-    case FETCH_DRIVERS:
+    case type.FETCH_DRIVERS_REQUEST:
+    case type.FETCH_DRIVER_STATUSES_REQUEST:
+    case type.CREATE_DRIVER_REQUEST:
+    case type.DELETE_DRIVER_REQUEST:
+    case type.UPDATE_DRIVER_REQUEST:
+      return { ...state };
+
+    case type.FETCH_DRIVERS_SUCCESS:
       return { ...state, drivers: action.payload };
 
-    case FETCH_DRIVER_STATUSES:
+    case type.FETCH_DRIVER_STATUSES_SUCCESS:
       return { ...state, statuses: action.payload };
 
-    case CREATE_DRIVER:
+    case type.CREATE_DRIVER_SUCCESS:
       return { ...state, drivers: [...state.drivers, action.payload] };
 
-    case DELETE_DRIVER:
+    case type.DELETE_DRIVER_SUCCESS:
       return {
         ...state,
         drivers: state.drivers.filter(
@@ -83,7 +47,7 @@ const driversReducer = <T extends TReducer>(
         ),
       };
 
-    case UPDATE_DRIVER:
+    case type.UPDATE_DRIVER_SUCCESS:
       return {
         ...state,
         drivers: state.drivers.map((driver: IDriver) => {
