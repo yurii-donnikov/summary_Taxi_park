@@ -5,12 +5,6 @@ import Modal from "../Modal/Modal";
 import sprite from "../../icons/symbol-defs.svg";
 
 const CarList = () => {
-
-    const [modalActive, setModalActive] = useState(false);
-
-    const renderModalCar = () => {
-        setModalActive(true);
-    };
     return (
         <div className={styles.list__contsiner}>
             <ul className={styles.list__header}>
@@ -22,19 +16,11 @@ const CarList = () => {
                 <li>Номер</li>
                 <li>Статус</li>
                 <li>Действия</li>
-                <li><button className={styles.open__btn}
-                onClick={() => renderModalCar()}>
-                    <svg className={styles.icon__create}>
-                        <use href={sprite + "#icon-TypeAdd"}/>
-                    </svg>
-                    <p>Авто</p>
-                    </button>
-                </li>
+                <li></li>
             </ul>
             <ul>
                 <CarItem/>
            </ul>
-           <Modal active={modalActive} setActive={setModalActive}/> 
         </div>
 
     )

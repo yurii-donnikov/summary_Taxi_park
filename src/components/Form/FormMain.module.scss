@@ -1,0 +1,32 @@
+.modal__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    input {
+        width: 30vw;
+        padding: 5px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+        border-width: 1px;
+    }
+
+    select {
+    width: max-content;
+    padding: 5px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    background-color: white;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .open__btn {
+        margin: 5px 10px;
+        padding: 15px;
+        background-color: skyblue;
+    }
+}
