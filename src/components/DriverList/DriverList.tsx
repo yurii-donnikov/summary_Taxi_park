@@ -3,13 +3,19 @@ import DriverItem from "./DriverListItem/DriverListItem";
 import Modal from "../Modal/Modal";
 import styles from "./DriverList.module.scss";
 import sprite from "../../icons/symbol-defs.svg";
+import FormCar from "../Form/FormCars";
+import FormDriver from "../Form/FormDrivers";
+
 
 const DriverList = () => {
 
     const [modalActive, setModalActive] = useState(false);
-
+    const [formType, setFormType] = useState(false);
+    const [type, setType] = useState(false);
+  
     const renderModalCar = () => {
-        setModalActive(true);
+      setModalActive(true);
+      setFormType(true);
     };
     return (
         <div className={styles.list__contsiner}>
@@ -21,7 +27,7 @@ const DriverList = () => {
                 <li>Статус</li>
                 <li>Действия</li>
                 <li>
-                    <button className={styles.open__btn} onClick={() => renderModalCar()}>
+                    <button data-action={'driver'} className={styles.open__btn} onClick={renderModalCar}>
                         <svg className={styles.icon__create}>
                             <use href={sprite + "#icon-TypeAdd"}/>
                         </svg>
@@ -32,7 +38,9 @@ const DriverList = () => {
             <ul>
                 <DriverItem/>
            </ul>
-           <Modal active={modalActive} setActive={setModalActive}/> 
+           <Modal active={modalActive} setActive={setModalActive}>
+                {<FormDriver  active={type} />}
+            </Modal> 
         </div>
 
     )

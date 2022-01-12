@@ -1,8 +1,9 @@
 
 export type IDriver = {
-	full_name: string,
-	date_birth: number,
-    registration: number,
+	first_name: string,
+    last_name: string,
+    date_created: number,
+    date_birth: number,
     id: number,
 	status: {
 	title: string,
@@ -11,10 +12,10 @@ export type IDriver = {
 }
   
 const drivers : IDriver[] = [
-    {
-        full_name: 'Агомен Мондрызги',
+    {   first_name: 'Агомен',
+        last_name: 'Мондрызги',
         date_birth: 392847398748,
-        registration: 8737627963726,
+        date_created: 8737627963726,
         id: 1,
         status: {
         title: 'Активен',
@@ -22,9 +23,10 @@ const drivers : IDriver[] = [
         },
     },
     {
-        full_name: 'Павло Зибров',
+        first_name: 'Павло',
+        last_name: 'Зибров',
         date_birth: 999999398748,
-        registration: 63726376126496,
+        date_created: 63726376126496,
         id: 2,
         status: {
         title: 'Неактивен',

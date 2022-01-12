@@ -10,24 +10,21 @@ const CarItem = () => {
                 cars.map((car) => (
                     <li key={car.driver_id} className={styles.data_list}>
 
-                        <p><strong>{car.driver_id}</strong></p>
+                        <p>{car.driver_id}</p>
 
-                        <p><strong>{car.driver}</strong></p>
+                        <p>{car.driver}</p>
 
-                        <p><strong>{car.model}</strong></p>
+                        <p>{car.model}</p>
 
-                        <p><strong>{car.mark}</strong></p>
+                        <p>{car.mark}</p>
 
-                        <p><strong>{car.year}</strong></p>
+                        <p>{car.year}</p>
 
-                        <p><strong>{car.number}</strong></p>
+                        <p>{car.number}</p>
 
-                        <select name="status">
-                        <option>{car.status.title}</option>
-                        <option value="active">Активен</option>
-                        <option value="inactive">Неактивен</option>
-                        <option value="blocked">Заблокирован</option>
-                        </select>
+                        <p>
+                        {car.status.title}
+                        </p>
 
                         <button>
                             <svg className={styles.icon}>
