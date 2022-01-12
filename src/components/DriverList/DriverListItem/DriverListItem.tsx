@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../DriverList.module.scss';
 import sprite from '../../../icons/symbol-defs.svg';
 import Modal from '../../Modal/Modal';
@@ -8,26 +8,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchDriversRequest } from '../../../redux/drivers/driversActions';
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
 
-
 const DriverItem = () => {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(fetchDriversRequest());
-  },[dispatch]);
-  
+  }, [dispatch]);
+
   const drivers = useSelector(getDrivers);
-  
+
   const [modalActive, setModalActive] = useState(false);
   const [formType, setFormType] = useState(false);
   const [type, setType] = useState(false);
 
-  const renderModalDriver = () =>{
+  const renderModalDriver = () => {
     setModalActive(true);
     setFormType(false);
     setType(true);
-  }
-  
+  };
+
   const renderModalCar = () => {
     setModalActive(true);
     setFormType(true);
@@ -37,26 +36,18 @@ const DriverItem = () => {
     <>
       {drivers.map(driver => (
         <li key={driver.id} className={styles.data_list}>
+          <p>{driver.id}</p>
           <p>
-            {driver.id}
-          </p>
-          <p>
-            {driver.first_name+' '}
+            {driver.first_name + ' '}
             {driver.last_name}
           </p>
-          <p>
-            {driver.date_birth}
-          </p>
-          <p>
-            {driver.date_created}
-          </p>
-          <p>
-            {driver.status.title}
-          </p>
+          <p>{driver.date_birth}</p>
+          <p>{driver.date_created}</p>
+          <p>{driver.status.title}</p>
 
           <div>
-            <button className={styles.ico__btn} onClick={renderModalDriver} >
-              <svg className={styles.icon} >
+            <button className={styles.ico__btn} onClick={renderModalDriver}>
+              <svg className={styles.icon}>
                 <use href={sprite + '#icon-TypeEdit'} />
               </svg>
             </button>
@@ -74,17 +65,20 @@ const DriverItem = () => {
             </button>
           </div>
 
-          <button data-value={'car'} className={styles.car__btn}
-            onClick={renderModalCar}>
+          <button
+            data-value={'car'}
+            className={styles.car__btn}
+            onClick={renderModalCar}
+          >
             <svg className={styles.icon__create}>
-                <use href={sprite + "#icon-TypeAdd"}/>
+              <use href={sprite + '#icon-TypeAdd'} />
             </svg>
             <p>Авто</p>
           </button>
         </li>
       ))}
       <Modal active={modalActive} setActive={setModalActive}>
-            {formType ? (<FormCar/>) : (<FormDriver active={type} />)}
+        {formType ? <FormCar /> : <FormDriver active={type} />}
       </Modal>
     </>
   );
