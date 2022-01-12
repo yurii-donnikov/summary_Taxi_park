@@ -1,10 +1,12 @@
-import React, { MouseEvent, useState } from 'react';
-import drivers from '../../driverBase/DriverBase';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import styles from '../DriverList.module.scss';
 import sprite from '../../../icons/symbol-defs.svg';
 import Modal from '../../Modal/Modal';
 import FormDriver from '../../Form/FormDrivers';
 import FormCar from '../../Form/FormCars';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchDriversRequest } from '../../../redux/drivers/driversActions';
+import { getDrivers } from '../../../redux/drivers/driversSelectors';
 
 
 const DriverItem = () => {
