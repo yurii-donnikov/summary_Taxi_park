@@ -1,16 +1,17 @@
-interface IStatus {
-  title: string;
-  code: string;
-}
+import { IDriver, IStatus } from "../../interfaces/driversInterfaces";
+// interface IStatus {
+//   title: string;
+//   code: string;
+// }
 
-interface IDriver {
-  id: number;
-  first_name: string;
-  last_name: string;
-  date_birth: number;
-  date_created: number;
-  status: IStatus;
-}
+// interface IDriver {
+//   id: number;
+//   first_name: string;
+//   last_name: string;
+//   date_birth: number;
+//   date_created: number;
+//   status: IStatus;
+// }
 
 interface IState {
   drivers: {

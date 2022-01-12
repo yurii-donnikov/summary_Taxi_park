@@ -1,30 +1,32 @@
 import * as type from './driversTypes';
-interface IStatus {
-  title: string;
-  code: string;
-}
-interface IDriver {
-  id: number;
-  first_name: string;
-  last_name: string;
-  date_created: number;
-  date_birth: number;
-  status: IStatus;
-}
-interface IDriversState {
-  drivers: IDriver[];
-  statuses: IStatus[];
-}
+import { IDriversState, IAction, IDriver, IStatus } from '../../interfaces/driversInterfaces';
+// import moduleName from 'module'
+// interface IStatus {
+//   title: string;
+//   code: string;
+// }
+// interface IDriver {
+//   id: number;
+//   first_name: string;
+//   last_name: string;
+//   date_created: number;
+//   date_birth: number;
+//   status: IStatus;
+// }
+// interface IDriversState {
+//   drivers: IDriver[];
+//   statuses: IStatus[];
+// }
 
 const initialState: IDriversState = {
   drivers: [],
   statuses: [],
 };
 
-interface IAction<T> {
-  type: string;
-  payload: T;
-}
+// interface IAction<T> {
+//   type: string;
+//   payload: T;
+// }
 type TReducer = IDriver & IDriver[] & IStatus[];
 
 const driversReducer = <T extends TReducer>(

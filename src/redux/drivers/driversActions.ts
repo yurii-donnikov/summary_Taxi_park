@@ -1,4 +1,5 @@
 import * as type from './driversTypes';
+// import {IAction} from '../../interfaces/driversInterfaces';
 
 interface IAction<T> {
   type: string;
