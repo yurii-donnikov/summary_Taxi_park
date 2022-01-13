@@ -16,20 +16,20 @@ export type IStatus = {
 
 export const statuses: IStatus[] = [
     {
-        "title": "Активный",
-        "code": "active"
+        title: "Активный",
+        code: "active"
     },
     {
-        "title": "Заблокирован",
-        "code": "blocked"
+        title: "Заблокирован",
+        code: "blocked"
     },
     {
-        "title": "Уволенный",
-        "code": "fired"
+        title: "Уволенный",
+        code: "fired"
     },
     {
-        "title": "Не активный",
-        "code": "not_active"
+        title: "Не активный",
+        code: "not_active"
     }
 ]
 

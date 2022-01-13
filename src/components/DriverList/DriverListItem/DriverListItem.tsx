@@ -70,8 +70,8 @@ const DriverItem = () => {
             {driver.first_name + ' '}
             {driver.last_name}
           </p>
-          <p>{driver.date_birth}</p>
-          <p>{driver.date_created}</p>
+          <p>{new Date(driver.date_birth).toLocaleDateString()}</p>
+          <p>{new Date(driver.date_created).toLocaleDateString()}</p>
           <p>{driver.status.title}</p>
 
           <div>
