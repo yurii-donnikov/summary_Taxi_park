@@ -6,11 +6,9 @@ import FormDriver from '../../Form/FormDrivers';
 import FormCar from '../../Form/FormCars';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  createDriverRequest,
   deleteDriverRequest,
   fetchDriversRequest,
   fetchDriverStatusesRequest,
-  updateDriverRequest,
 } from '../../../redux/drivers/driversActions';
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
 
@@ -20,6 +18,7 @@ const DriverItem = () => {
 
   useEffect(() => {
     dispatch(fetchDriversRequest());
+    dispatch(fetchDriverStatusesRequest())
   }, [dispatch]);
 
   const [modalActive, setModalActive] = useState(false);
@@ -43,26 +42,8 @@ const DriverItem = () => {
     dispatch(deleteDriverRequest(driverId));
   };
 
-  const testDriver = {
-    first_name: 'NEW DRIVER',
-    last_name: 'NEW DRIVER',
-    date_birth: 1356897599,
-    status: {
-      title: 'Активный',
-      code: 'active',
-    },
-  };
-
-  const handlerCreateBtn = () => {
-    // dispatch(createDriverRequest(testDriver));
-    // dispatch(fetchDriverStatusesRequest());
-    dispatch(updateDriverRequest(testDriver));
-  
-  };
-
   return (
     <>
-      <button onClick={handlerCreateBtn}>add driver</button>
       {drivers.map(driver => (
         <li key={driver.id} className={styles.data_list}>
           <p>{driver.id}</p>

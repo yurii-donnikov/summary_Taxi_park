@@ -1,5 +1,4 @@
 import { useFormik } from 'formik';
-import * as React from 'react';
 import styles from './FormMain.module.scss';
 import { statuses } from '../carBase/CarBase';
 
@@ -38,7 +37,7 @@ const FormCar = () => {
     setTimeout(() => {
       alert(JSON.stringify(car, null, 2));
     }, 400);
-    // dispatch(addDriverRequest(driver));
+    // dispatch(createCarRequest(car));
   };
 
   const formik = useFormik({
@@ -109,22 +108,19 @@ const FormCar = () => {
       </label>
       <label>
         <select
-            name="status"
-            required
-            onChange={formik.handleChange}
-            value={formik.values.status}
-          >
-            {statuses.map((status: IStatus) => (
-                  <option key={status.code} value={status.code}>
-                    {status.title}
-                  </option>
-            ))}
-          </select>
+          name="status"
+          required
+          onChange={formik.handleChange}
+          value={formik.values.status}
+        >
+          {statuses.map((status: IStatus) => (
+            <option key={status.code} value={status.code}>
+              {status.title}
+            </option>
+          ))}
+        </select>
       </label>
-      <button
-        className={styles.open__btn}
-        type="submit"
-      >
+      <button className={styles.open__btn} type="submit">
         Отправить
       </button>
     </form>
