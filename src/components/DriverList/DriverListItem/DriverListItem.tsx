@@ -10,7 +10,6 @@ import {
   fetchDriversRequest,
 } from '../../../redux/drivers/driversActions';
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
-import { deleteDriver } from '../../apiService/apiDrivers';
 
 const DriverItem = () => {
   const dispatch = useDispatch();
@@ -35,12 +34,10 @@ const DriverItem = () => {
     setFormType(true);
   };
 
-  const handlerDeleteBtn = (event: any) => {
-    const driverId = event.currentTarget.id;
+  const handlerDeleteBtn = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const driverId = Number(event.currentTarget.id);
 
-    deleteDriver(driverId);
-
-    dispatch(deleteDriverRequest());
+    dispatch(deleteDriverRequest(driverId));
   };
 
   return (
@@ -52,8 +49,8 @@ const DriverItem = () => {
             {driver.first_name + ' '}
             {driver.last_name}
           </p>
-          <p>{driver.date_birth}</p>
-          <p>{driver.date_created}</p>
+          <p>{new Date(driver.date_birth).toLocaleDateString()}</p>
+          <p>{new Date(driver.date_created).toLocaleDateString()}</p>
           <p>{driver.status.title}</p>
 
           <div>

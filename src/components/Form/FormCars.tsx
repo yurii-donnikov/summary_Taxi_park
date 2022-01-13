@@ -1,38 +1,132 @@
+import { useFormik } from 'formik';
 import * as React from 'react';
-import styles from './FormMain.module.scss'
+import styles from './FormMain.module.scss';
+import { statuses } from '../carBase/CarBase';
+
+interface IForm {
+  mark: string;
+  model: string;
+  year: string;
+  number: string;
+  status: string;
+}
+
+interface IStatus {
+  title: string;
+  code: string;
+}
 
 const FormCar = () => {
+  const getFullCarStatus = (status: string) => {
+    return statuses.reduce((acc: IStatus, { title, code }) => {
+      if (code === status) {
+        acc.title = title;
+        acc.code = code;
+      }
+      return acc;
+    });
+  };
+
+  const addCar = (data: IForm) => {
+    const car = {
+      mark: data.mark,
+      model: data.model,
+      year: Date.parse(data.year),
+      number: data.number,
+      status: getFullCarStatus(data.status),
+    };
+    setTimeout(() => {
+      alert(JSON.stringify(car, null, 2));
+    }, 400);
+    // dispatch(addDriverRequest(driver));
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      mark: '',
+      model: '',
+      year: '',
+      number: '',
+      status: '',
+    },
+    onSubmit: values => {
+      addCar(values);
+      formik.resetForm();
+    },
+  });
+
   return (
-    <form className={styles.modal__form}>
-          <label>
-            Марка
-            <input name="mark" type="text" />
-          </label>
-          <label>
-            Модель
-            <input name="model" type="text" />
-          </label>
-          <label>
-            Год
-            <input name="year" type="text" />
-          </label>
-          <label>
-            Номер
-            <input name="number" type="text" />
-          </label>
-          <label>
-            Водитель
-            <input name="driver" type="text" />
-          </label>
-          <label>
-            Статус
-            <select name="status">
-              <option value="active">Активен</option>
-              <option value="inactive">Неактивен</option>
-              <option value="blocked">Заблокирован</option>
-            </select>
-        </label>
-      <button className={styles.open__btn}>Submit</button>
+    <form className={styles.modal__form} onSubmit={formik.handleSubmit}>
+      <label>
+        Марка
+        <input
+          className={styles.form_input}
+          type="text"
+          name="mark"
+          placeholder=" "
+          pattern="[A-ZА-Я]{1}[a-zа-я]{1,15}"
+          onChange={formik.handleChange}
+          value={formik.values.mark}
+        />
+      </label>
+      <label>
+        Модель
+        <input
+          className={styles.form_input}
+          type="text"
+          name="model"
+          placeholder=" "
+          pattern="[A-ZА-Я]{1}[a-zа-я]{1,15}"
+          onChange={formik.handleChange}
+          value={formik.values.model}
+        />
+      </label>
+      <label>
+        Год
+        <input
+          className={styles.form_input}
+          type="number"
+          name="year"
+          min="1975"
+          max="2022"
+          pattern="\d{4}"
+          placeholder=" "
+          onChange={formik.handleChange}
+          value={formik.values.year}
+        />
+      </label>
+      <label>
+        Номер
+        <input
+          className={styles.form_input}
+          type="text"
+          name="number"
+          placeholder=" "
+          pattern="[a-zA-Z]{2}\d{4}[a-zA-Z]{2}"
+          onChange={formik.handleChange}
+          value={formik.values.number}
+        />
+      </label>
+      <label>
+        <select
+            name="status"
+            required
+            onChange={formik.handleChange}
+            value={formik.values.status}
+          >
+            {statuses.map((status: IStatus) => (
+                  <option key={status.code} value={status.code}>
+                    {status.title}
+                  </option>
+            ))}
+          </select>
+      </label>
+      <button
+        className={styles.open__btn}
+        type="submit"
+      >
+        Отправить
+      </button>
     </form>
   );
 };
