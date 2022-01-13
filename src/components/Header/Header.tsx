@@ -1,8 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
+import { useTranslation } from 'react-i18next';
+import { LanguageBlock } from './LanguageBlock/LanguageBlock';
 
 function Header() {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (language: string) => {
+    i18n.changeLanguage(language);
+  };
   return (
     <>
       <header>
@@ -13,13 +20,14 @@ function Header() {
           <nav className={styles.menu}>
             <ul role="list">
               <li>
-                <NavLink to="/drivers">Водители</NavLink>
+                <NavLink to="/drivers">{t('header_driver')}</NavLink>
               </li>
               <li>
-                <NavLink to="/cars">Автомобили</NavLink>
+                <NavLink to="/cars">{t('header_car')}</NavLink>
               </li>
             </ul>
           </nav>
+          <LanguageBlock />
         </div>
       </header>
     </>

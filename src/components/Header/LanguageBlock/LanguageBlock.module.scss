@@ -1,0 +1,21 @@
+.radio {
+  display: none;
+}
+.wrapper label {
+  display: inline-block;
+  width: auto;
+  font-size: 0;
+  cursor: pointer;
+}
+.wrapper label {
+   margin-right: 10px;
+ }
+.wrapper label:last-child {
+  margin-right: 0;
+}
+.wrapper svg {
+  transition: all .05s ease;
+}
+.wrapper svg:hover {
+  transform: scale(1.1);
+}

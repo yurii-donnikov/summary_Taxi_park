@@ -1,0 +1,23 @@
+{
+  "header_driver": "Водії",
+  "header_car": "Автомобілі",
+  "main_page": "Головна сторінка",
+  "breadcrembs_main": "Головна",
+  "breadcrembs_drivers": "Водії",
+  "breadcrembs_car": "Автомобілі",
+  "driver_name" : "Ім'я",
+  "driver_surname": "Прізвище",
+  "driver_birth": "Дата народження",
+  "driver_registration": "Реєстрація",
+  "driver_status": "Статус",
+  "driver_actions": "Дії",
+  "car_brand": "Марка",
+  "car_model": "Модель",
+  "car_year": "Рік",
+  "car_number": "Номер",
+  "status_active": "Активний",
+  "status_not_active": "Не активний",
+  "status_blocked": "Заблоковано",
+  "button_add_driver": "Водій",
+  "button_add_car": "Автомобіль"
+}
