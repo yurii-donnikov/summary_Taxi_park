@@ -1,6 +1,4 @@
 import styles from './Modal.module.scss';
-// import FormDriver from '../Form/FormDrivers';
-// import FormCar from '../Form/FormCars';
 
 const Modal = ({
   children,
