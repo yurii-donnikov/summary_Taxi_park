@@ -12,10 +12,10 @@ export interface IDriver {
   status: IDriverStatus;
 }
 
-// export interface IAction<T> {
-//   type: string;
-//   payload: T;
-// }
+export interface IAction {
+  type: string;
+  payload: number;
+}
 
 export interface IDriversState {
   drivers: IDriver[];

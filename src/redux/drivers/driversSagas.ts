@@ -2,10 +2,8 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import * as type from './driversTypes';
 import {
   deleteDriverError,
-  deleteDriverRequest,
   deleteDriverSuccess,
   fetchDriversError,
-  fetchDriversRequest,
   fetchDriversSuccess,
 } from './driversActions';
 import { IDriver } from '../../interfaces/driversInterfaces';
