@@ -1,26 +1,15 @@
 import * as type from './driversTypes';
 import {
   IDriversState,
-  IDriver,
-  IDriverStatus,
+  IAction,
 } from '../../interfaces/driversInterfaces';
-interface IAction<T> {
-  type: string;
-  payload: T;
-}
-
-type TReducer = IDriver & IDriver[] & IDriverStatus[];
 
 const initialState: IDriversState = {
   drivers: [],
   statuses: [],
 };
 
-const driversReducer = <T extends TReducer>(
-  state: IDriversState,
-  action: IAction<T>,
-): IDriversState => {
-  state = state || initialState;
+const driversReducer = (state = initialState, action: IAction) => {
 
   switch (action.type) {
     case type.FETCH_DRIVERS_REQUEST:
@@ -42,16 +31,14 @@ const driversReducer = <T extends TReducer>(
     case type.DELETE_DRIVER_SUCCESS:
       return {
         ...state,
-        drivers: state.drivers.filter(
-          driver => driver.id !== action.payload.id,
-        ),
+        drivers: state.drivers.filter(driver => driver.id !== action.payload),
       };
 
     case type.UPDATE_DRIVER_SUCCESS:
       return {
         ...state,
-        drivers: state.drivers.map((driver: IDriver) => {
-          if (driver.id === action.payload.id) {
+        drivers: state.drivers.map((driver) => {
+          if (driver.id === action.payload) {
             driver = Object.assign({}, driver, action.payload);
             return driver;
           }
