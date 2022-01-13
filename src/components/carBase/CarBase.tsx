@@ -6,13 +6,34 @@ export type ICar = {
     year: number,
     number: string,
     driver_id: number,
-    status: {
-        title: string,
-        code: string,
-    },
+    status: IStatus,
 }
 
-const cars: ICar[] = [
+export type IStatus = {
+    title: string,
+    code: string,
+}
+
+export const statuses: IStatus[] = [
+    {
+        "title": "Активный",
+        "code": "active"
+    },
+    {
+        "title": "Заблокирован",
+        "code": "blocked"
+    },
+    {
+        "title": "Уволенный",
+        "code": "fired"
+    },
+    {
+        "title": "Не активный",
+        "code": "not_active"
+    }
+]
+
+export const cars: ICar[] = [
     {
         model: 'Мазда',
         driver: 'Агомен Мондрызги',
@@ -38,5 +59,3 @@ const cars: ICar[] = [
         },
     },
 ]
-
-export default cars;

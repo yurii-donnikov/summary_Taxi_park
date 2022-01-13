@@ -1,5 +1,5 @@
 import React from "react";
-import cars from "../../carBase/CarBase";
+import {cars }from "../../carBase/CarBase";
 import styles from "../CarList.module.scss";
 import sprite from "../../../icons/symbol-defs.svg";
 
