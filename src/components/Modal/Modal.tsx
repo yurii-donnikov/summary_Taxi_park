@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Modal.module.scss';
 import drivers from '../driverBase/DriverBase';
-import cars from '../carBase/CarBase';
 import FormDriver from '../Form/FormDrivers';
 import FormCar from '../Form/FormCars';
 
