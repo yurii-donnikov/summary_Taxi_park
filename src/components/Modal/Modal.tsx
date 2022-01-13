@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import styles from './Modal.module.scss';
 import drivers from '../driverBase/DriverBase';
 import FormDriver from '../Form/FormDrivers';
@@ -29,3 +28,4 @@ const Modal = ({
 };
 
 export default Modal;
+

@@ -1,23 +1,27 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import stales from '../Header/Header.module.scss';
+import styles from '../Header/Header.module.scss';
 import { faHome, faAngleRight, faCar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import sprite from '../../icons/symbol-defs.svg';
+let angleRight = '>';
 function BreadcrambsCars() {
   return (
-    <div className={stales.section}>
-      <div className={stales.container}>
-        <div className={stales.breadcrambs}>
+    <div className={styles.section}>
+      <div className={styles.container}>
+        <div className={styles.breadcrambs}>
           <ul>
             <li>
-              <FontAwesomeIcon icon={faHome} />
-              <NavLink to="/">Главная</NavLink>
+              <svg className={styles.icon}>
+                <use href={sprite + '#icon-TypeHome'} />
+              </svg>
+              <NavLink to="/">Главная {angleRight}</NavLink>
             </li>
-            <FontAwesomeIcon icon={faAngleRight} />
-            <li className={stales.current}>
-              <FontAwesomeIcon icon={faCar} />
-              <NavLink to="" className={stales.current}>
+            <li className={styles.current}>
+              <svg className={styles.icon}>
+                <use href={sprite + '#icon-car-solid'} />
+              </svg>
+              <NavLink to="" className={styles.current}>
                 Автомобили
               </NavLink>
             </li>
