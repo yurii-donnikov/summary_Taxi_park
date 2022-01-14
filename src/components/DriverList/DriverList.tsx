@@ -12,10 +12,12 @@ const DriverList = () => {
   const [formType, setFormType] = useState(false);
   const [type, setType] = useState(false);
 
-  const renderModalCar = () => {
+  const renderModalDriver = () => {
     setModalActive(true);
-    setFormType(true);
+    setFormType(false);
+    setType(false);
   };
+
   return (
     <div className={styles.list__contsiner}>
       <ul className={styles.list__header}>
@@ -27,9 +29,8 @@ const DriverList = () => {
         <li>{t('driver_actions')}</li>
         <li>
           <button
-            data-action={'driver'}
             className={styles.open__btn}
-            onClick={renderModalCar}
+            onClick={renderModalDriver}
           >
             <svg className={styles.icon__create}>
               <use href={sprite + '#icon-TypeAdd'} />
@@ -42,7 +43,7 @@ const DriverList = () => {
         <DriverItem />
       </ul>
       <Modal active={modalActive} setActive={setModalActive}>
-        {<FormDriver active={type} />}
+        {<FormDriver active={type} setActive={setModalActive}/>}
       </Modal>
     </div>
   );

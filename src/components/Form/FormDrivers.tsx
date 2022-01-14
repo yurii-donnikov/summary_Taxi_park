@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { createDriverRequest } from '../../redux/drivers/driversActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDriverStatuses } from '../../redux/drivers/driversSelectors';
+import { useState } from 'react';
 
 
 interface IForm {
@@ -18,7 +19,13 @@ interface IStatus {
   code: string;
 }
 
-const FormDriver = ({ active }: { active: boolean }) => {
+const FormDriver = ({
+  active,
+  setActive,
+}: {
+  active: boolean;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const dispatch = useDispatch();
   const statuses = useSelector(getDriverStatuses);
 
@@ -45,16 +52,40 @@ const FormDriver = ({ active }: { active: boolean }) => {
     dispatch(createDriverRequest(driver));
   };
 
+  const init = (active: boolean): IForm => {
+    let temp;
+    let temp2;
+    if(active){
+      temp = {
+        first_name: 'fffff',
+        last_name: '',
+        date_birth: '',
+        status: '',
+      }
+      return temp;
+    } 
+      temp2 = {
+        first_name: 'aaa',
+        last_name: 'aaaa',
+        date_birth: '',
+        status: '',
+      }
+      return temp2;
+    
+  };
+
+  
   const formik = useFormik({
-    initialValues: {
-      first_name: '',
-      last_name: '',
-      date_birth: '',
-      status: '',
-    },
+    initialValues: init(active),
+    
     onSubmit: values => {
-      addDriver(values);
-      formik.resetForm();
+      if (!active) {
+        addDriver(values);
+        formik.resetForm();
+        setActive(false);
+      } else {
+        console.log("AAAAAAAAAAAAAAAAAAAAA")
+      }
     },
   });
 
@@ -64,6 +95,7 @@ const FormDriver = ({ active }: { active: boolean }) => {
         {t('driver_name')}
         <input
           className={styles.form_input}
+          required
           type="text"
           name="first_name"
           placeholder=" "
@@ -76,6 +108,7 @@ const FormDriver = ({ active }: { active: boolean }) => {
         {t('driver_surname')}
         <input
           className={styles.form_input}
+          required
           type="text"
           name="last_name"
           placeholder=" "
@@ -88,6 +121,7 @@ const FormDriver = ({ active }: { active: boolean }) => {
         <label>
           {t('driver_birth')}
           <input
+            required
             type="date"
             name="date_birth"
             min="1970-01-01"
@@ -125,6 +159,15 @@ const FormDriver = ({ active }: { active: boolean }) => {
           ))}
         </select>
       </label>
+      {!active ? (
+        <button className={styles.open__btn} type="submit">
+          Создать
+        </button>
+      ) : (
+        <button className={styles.open__btn} type="submit">
+          Изменить
+        </button>
+      )}
       <button className={styles.open__btn} type="submit">
         {t('button_send')}
       </button>

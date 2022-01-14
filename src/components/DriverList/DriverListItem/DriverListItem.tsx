@@ -25,13 +25,13 @@ const DriverItem = () => {
 
   const [modalActive, setModalActive] = useState(false);
   const [formType, setFormType] = useState(false);
-  const [type, setType] = useState(false);
+  const [type, setType] = useState(true);
 
-  const renderModalDriver = () => {
+  const modifyDriver = () => {
     setModalActive(true);
     setFormType(false);
     setType(true);
-  };
+  }
 
   const renderModalCar = () => {
     setModalActive(true);
@@ -58,7 +58,7 @@ const DriverItem = () => {
           <p>{driver.status.title}</p>
 
           <div>
-            <button className={styles.ico__btn} onClick={renderModalDriver}>
+            <button className={styles.ico__btn} onClick={modifyDriver}>
               <svg className={styles.icon}>
                 <use href={sprite + '#icon-TypeEdit'} />
               </svg>
@@ -94,7 +94,7 @@ const DriverItem = () => {
         </li>
       ))}
       <Modal active={modalActive} setActive={setModalActive}>
-        {formType ? <FormCar /> : <FormDriver active={type} />}
+        {formType ? <FormCar setActive={setModalActive}/> : <FormDriver active={type} setActive={setModalActive}/>}
       </Modal>
     </>
   );

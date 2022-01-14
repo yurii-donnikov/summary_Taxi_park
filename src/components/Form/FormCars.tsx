@@ -16,8 +16,12 @@ interface IStatus {
   code: string;
 }
 
+
+const FormCar = ({setActive}:{setActive: React.Dispatch<React.SetStateAction<boolean>>}) => {
+
 const FormCar = () => {
   const { t, i18n } = useTranslation();
+
   const getFullCarStatus = (status: string) => {
     return statuses.reduce((acc: IStatus, { title, code }) => {
       if (code === status) {
@@ -53,6 +57,7 @@ const FormCar = () => {
     onSubmit: values => {
       addCar(values);
       formik.resetForm();
+      setActive(false);
     },
   });
 
@@ -62,6 +67,7 @@ const FormCar = () => {
         {t('car_brand')}
         <input
           className={styles.form_input}
+          required
           type="text"
           name="mark"
           placeholder=" "
@@ -74,6 +80,7 @@ const FormCar = () => {
         {t('car_model')}
         <input
           className={styles.form_input}
+          required
           type="text"
           name="model"
           placeholder=" "
@@ -86,6 +93,7 @@ const FormCar = () => {
         {t('car_year')}
         <input
           className={styles.form_input}
+          required
           type="number"
           name="year"
           min="1975"
@@ -100,6 +108,7 @@ const FormCar = () => {
         {t('car_number')}
         <input
           className={styles.form_input}
+          required
           type="text"
           name="number"
           placeholder=" "
@@ -123,6 +132,7 @@ const FormCar = () => {
         </select>
       </label>
       <button className={styles.open__btn} type="submit">
+        Создать
         {t('button_send')}
       </button>
     </form>
