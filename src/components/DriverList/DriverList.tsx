@@ -4,8 +4,10 @@ import Modal from '../Modal/Modal';
 import styles from './DriverList.module.scss';
 import sprite from '../../icons/symbol-defs.svg';
 import FormDriver from '../Form/FormDrivers';
+import { useTranslation } from 'react-i18next';
 
 const DriverList = () => {
+  const { t, i18n } = useTranslation();
   const [modalActive, setModalActive] = useState(false);
   const [formType, setFormType] = useState(false);
   const [type, setType] = useState(false);
@@ -20,11 +22,11 @@ const DriverList = () => {
     <div className={styles.list__contsiner}>
       <ul className={styles.list__header}>
         <li>ID</li>
-        <li>ФИО</li>
-        <li>Дата рождения</li>
-        <li>Регистрация</li>
-        <li>Статус</li>
-        <li>Действия</li>
+        <li>{t('driver_name')}</li>
+        <li>{t('driver_birth')}</li>
+        <li>{t('driver_registration')}</li>
+        <li>{t('driver_status')}</li>
+        <li>{t('driver_actions')}</li>
         <li>
           <button
             className={styles.open__btn}
@@ -33,7 +35,7 @@ const DriverList = () => {
             <svg className={styles.icon__create}>
               <use href={sprite + '#icon-TypeAdd'} />
             </svg>
-            <p>Водитель</p>
+            <p>{t('button_add_driver')}</p>
           </button>
         </li>
       </ul>

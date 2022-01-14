@@ -1,9 +1,11 @@
 import styles from './FormMain.module.scss';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import { createDriverRequest } from '../../redux/drivers/driversActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDriverStatuses } from '../../redux/drivers/driversSelectors';
 import { useState } from 'react';
+
 
 interface IForm {
   first_name: string;
@@ -27,13 +29,14 @@ const FormDriver = ({
   const dispatch = useDispatch();
   const statuses = useSelector(getDriverStatuses);
 
+  const { t, i18n } = useTranslation();
+  
   const getFullDriverStatus = (status: string) => {
     return statuses.reduce((acc: IStatus, { title, code }) => {
       if (code === status) {
         acc.title = title;
         acc.code = code;
       }
-
       return acc;
     });
   };
@@ -89,7 +92,7 @@ const FormDriver = ({
   return (
     <form className={styles.modal__form} onSubmit={formik.handleSubmit}>
       <label>
-        Имя
+        {t('driver_name')}
         <input
           className={styles.form_input}
           required
@@ -102,7 +105,7 @@ const FormDriver = ({
         />
       </label>
       <label>
-        Фамилия
+        {t('driver_surname')}
         <input
           className={styles.form_input}
           required
@@ -116,7 +119,7 @@ const FormDriver = ({
       </label>
       {!active ? (
         <label>
-          Дата рождения
+          {t('driver_birth')}
           <input
             required
             type="date"
@@ -129,7 +132,7 @@ const FormDriver = ({
         </label>
       ) : (
         <label>
-          Дата рождения
+          {t('driver_birth')}
           <input
             disabled
             type="date"
@@ -142,7 +145,7 @@ const FormDriver = ({
         </label>
       )}
       <label>
-        Статус
+        {t('driver_status')}
         <select
           name="status"
           required
@@ -165,6 +168,9 @@ const FormDriver = ({
           Изменить
         </button>
       )}
+      <button className={styles.open__btn} type="submit">
+        {t('button_send')}
+      </button>
     </form>
   );
 };

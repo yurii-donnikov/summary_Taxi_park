@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import styles from './FormMain.module.scss';
 import { statuses } from '../carBase/CarBase';
+import { useTranslation } from 'react-i18next';
 
 interface IForm {
   mark: string;
@@ -15,7 +16,12 @@ interface IStatus {
   code: string;
 }
 
+
 const FormCar = ({setActive}:{setActive: React.Dispatch<React.SetStateAction<boolean>>}) => {
+
+const FormCar = () => {
+  const { t, i18n } = useTranslation();
+
   const getFullCarStatus = (status: string) => {
     return statuses.reduce((acc: IStatus, { title, code }) => {
       if (code === status) {
@@ -58,7 +64,7 @@ const FormCar = ({setActive}:{setActive: React.Dispatch<React.SetStateAction<boo
   return (
     <form className={styles.modal__form} onSubmit={formik.handleSubmit}>
       <label>
-        Марка
+        {t('car_brand')}
         <input
           className={styles.form_input}
           required
@@ -71,7 +77,7 @@ const FormCar = ({setActive}:{setActive: React.Dispatch<React.SetStateAction<boo
         />
       </label>
       <label>
-        Модель
+        {t('car_model')}
         <input
           className={styles.form_input}
           required
@@ -84,7 +90,7 @@ const FormCar = ({setActive}:{setActive: React.Dispatch<React.SetStateAction<boo
         />
       </label>
       <label>
-        Год
+        {t('car_year')}
         <input
           className={styles.form_input}
           required
@@ -99,7 +105,7 @@ const FormCar = ({setActive}:{setActive: React.Dispatch<React.SetStateAction<boo
         />
       </label>
       <label>
-        Номер
+        {t('car_number')}
         <input
           className={styles.form_input}
           required
@@ -127,6 +133,7 @@ const FormCar = ({setActive}:{setActive: React.Dispatch<React.SetStateAction<boo
       </label>
       <button className={styles.open__btn} type="submit">
         Создать
+        {t('button_send')}
       </button>
     </form>
   );

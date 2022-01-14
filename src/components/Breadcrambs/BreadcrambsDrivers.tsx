@@ -8,8 +8,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import sprite from '../../icons/symbol-defs.svg';
+import { useTranslation } from 'react-i18next';
 let angleRight = '>';
+
 function BreadcrambsDrivers() {
+  const { t, i18n } = useTranslation();
   return (
     <div className={styles.section}>
       <div className={styles.container}>
@@ -19,7 +22,9 @@ function BreadcrambsDrivers() {
               <svg className={styles.icon}>
                 <use href={sprite + '#icon-TypeHome'} />
               </svg>
-              <NavLink to="/">Главная {angleRight}</NavLink>
+              <NavLink to="/">
+                {t('breadcrembs_main')} {angleRight}
+              </NavLink>
             </li>
 
             <li className={styles.current}>
@@ -27,7 +32,7 @@ function BreadcrambsDrivers() {
                 <use href={sprite + '#icon-TypeUsers'} />
               </svg>
               <NavLink to="" className={styles.current}>
-                Водители
+                {t('breadcrembs_drivers')}
               </NavLink>
             </li>
           </ul>
