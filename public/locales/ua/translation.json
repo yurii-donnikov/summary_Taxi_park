@@ -18,6 +18,8 @@
   "status_active": "Активний",
   "status_not_active": "Не активний",
   "status_blocked": "Заблоковано",
+  "status_fired": "Звільнений",
   "button_add_driver": "Водій",
-  "button_add_car": "Автомобіль"
+  "button_add_car": "Авто",
+  "button_send": "Відправити"
 }

@@ -6,10 +6,6 @@ import { LanguageBlock } from './LanguageBlock/LanguageBlock';
 
 function Header() {
   const { t, i18n } = useTranslation();
-
-  const changeLanguage = (language: string) => {
-    i18n.changeLanguage(language);
-  };
   return (
     <>
       <header>

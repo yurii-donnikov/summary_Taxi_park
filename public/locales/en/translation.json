@@ -8,7 +8,7 @@
   "driver_name" : "Name",
   "driver_surname": "Surname",
   "driver_birth": "Date of birth",
-  "driver_registration": "registration",
+  "driver_registration": "Registration",
   "driver_status": "Status",
   "driver_actions": "Actions",
   "car_brand": "Brand",
@@ -17,7 +17,9 @@
   "car_number": "Number",
   "status_active": "Active",
   "status_not_active": "Not active",
-  "status_blocked": "blocked",
-  "button_add_driver": "Add driver",
-  "button_add_car": "Add car"
+  "status_blocked": "Blocked",
+  "status_fired": "Fired",
+  "button_add_driver": "Driver",
+  "button_add_car": "Car",
+  "button_send": "Submit"
 }

@@ -14,16 +14,16 @@ export const LanguageBlock = () => {
   return (
     <div className={classes.wrapper}>
       <label htmlFor="ru">
-        <img src={ru} />
+        <img src={ru} className={classes.langImg} />
       </label>
       <label htmlFor="en">
-        <img src={en} />
+        <img src={en} className={classes.langImg} />
       </label>
       <label htmlFor="de">
-        <img src={de} />
+        <img src={de} className={classes.langImg} />
       </label>
       <label htmlFor="ua">
-        <img src={ua} />
+        <img src={ua} className={classes.langImg} />
       </label>
       <input
         className={classes.radio}

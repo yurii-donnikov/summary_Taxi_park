@@ -10,8 +10,10 @@ import {
   fetchDriversRequest,
 } from '../../../redux/drivers/driversActions';
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
+import { useTranslation } from 'react-i18next';
 
 const DriverItem = () => {
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const drivers = useSelector(getDrivers);
 
@@ -85,7 +87,7 @@ const DriverItem = () => {
             <svg className={styles.icon__create}>
               <use href={sprite + '#icon-TypeAdd'} />
             </svg>
-            <p>Авто</p>
+            <p>{t('button_add_car')}</p>
           </button>
         </li>
       ))}

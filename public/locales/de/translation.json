@@ -18,6 +18,8 @@
   "status_active": "Aktiv",
   "status_not_active": "Nicht aktiv",
   "status_blocked": "Verstopft",
+  "status_fired": "Gefeuert",
   "button_add_driver": "Treiber",
-  "button_add_car": "Automobil"
+  "button_add_car": "Auto",
+  "button_send": "Submit"
 }

@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import * as React from 'react';
 import styles from './FormMain.module.scss';
 import { statuses } from '../carBase/CarBase';
+import { useTranslation } from 'react-i18next';
 
 interface IForm {
   mark: string;
@@ -17,6 +18,7 @@ interface IStatus {
 }
 
 const FormCar = () => {
+  const { t, i18n } = useTranslation();
   const getFullCarStatus = (status: string) => {
     return statuses.reduce((acc: IStatus, { title, code }) => {
       if (code === status) {
@@ -58,7 +60,7 @@ const FormCar = () => {
   return (
     <form className={styles.modal__form} onSubmit={formik.handleSubmit}>
       <label>
-        Марка
+        {t('car_brand')}
         <input
           className={styles.form_input}
           type="text"
@@ -70,7 +72,7 @@ const FormCar = () => {
         />
       </label>
       <label>
-        Модель
+        {t('car_model')}
         <input
           className={styles.form_input}
           type="text"
@@ -82,7 +84,7 @@ const FormCar = () => {
         />
       </label>
       <label>
-        Год
+        {t('car_year')}
         <input
           className={styles.form_input}
           type="number"
@@ -96,7 +98,7 @@ const FormCar = () => {
         />
       </label>
       <label>
-        Номер
+        {t('car_number')}
         <input
           className={styles.form_input}
           type="text"
@@ -109,23 +111,20 @@ const FormCar = () => {
       </label>
       <label>
         <select
-            name="status"
-            required
-            onChange={formik.handleChange}
-            value={formik.values.status}
-          >
-            {statuses.map((status: IStatus) => (
-                  <option key={status.code} value={status.code}>
-                    {status.title}
-                  </option>
-            ))}
-          </select>
+          name="status"
+          required
+          onChange={formik.handleChange}
+          value={formik.values.status}
+        >
+          {statuses.map((status: IStatus) => (
+            <option key={status.code} value={status.code}>
+              {status.title}
+            </option>
+          ))}
+        </select>
       </label>
-      <button
-        className={styles.open__btn}
-        type="submit"
-      >
-        Отправить
+      <button className={styles.open__btn} type="submit">
+        {t('button_send')}
       </button>
     </form>
   );
