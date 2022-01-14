@@ -21,5 +21,7 @@
   "status_fired": "Уволен",
   "button_add_driver": "Водитель",
   "button_add_car": "Авто",
-  "button_send": "Отправить"
+  "button_send": "Отправить",
+  "button_create": "Создать",
+  "button_edit": "Изменить"
 }

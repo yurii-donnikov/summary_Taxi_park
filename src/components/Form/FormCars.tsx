@@ -16,11 +16,12 @@ interface IStatus {
   code: string;
 }
 
-
-const FormCar = ({setActive}:{setActive: React.Dispatch<React.SetStateAction<boolean>>}) => {
-
-const FormCar = () => {
-  const { t, i18n } = useTranslation();
+const FormCar = ({
+  setActive,
+}: {
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const { t } = useTranslation();
 
   const getFullCarStatus = (status: string) => {
     return statuses.reduce((acc: IStatus, { title, code }) => {
@@ -132,8 +133,7 @@ const FormCar = () => {
         </select>
       </label>
       <button className={styles.open__btn} type="submit">
-        Создать
-        {t('button_send')}
+        {t('button_create')}
       </button>
     </form>
   );
