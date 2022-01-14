@@ -1,8 +1,10 @@
 import styles from './FormMain.module.scss';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import { createDriverRequest } from '../../redux/drivers/driversActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDriverStatuses } from '../../redux/drivers/driversSelectors';
+
 
 interface IForm {
   first_name: string;
@@ -20,13 +22,14 @@ const FormDriver = ({ active }: { active: boolean }) => {
   const dispatch = useDispatch();
   const statuses = useSelector(getDriverStatuses);
 
+  const { t, i18n } = useTranslation();
+  
   const getFullDriverStatus = (status: string) => {
     return statuses.reduce((acc: IStatus, { title, code }) => {
       if (code === status) {
         acc.title = title;
         acc.code = code;
       }
-
       return acc;
     });
   };
@@ -58,7 +61,7 @@ const FormDriver = ({ active }: { active: boolean }) => {
   return (
     <form className={styles.modal__form} onSubmit={formik.handleSubmit}>
       <label>
-        Имя
+        {t('driver_name')}
         <input
           className={styles.form_input}
           type="text"
@@ -70,7 +73,7 @@ const FormDriver = ({ active }: { active: boolean }) => {
         />
       </label>
       <label>
-        Фамилия
+        {t('driver_surname')}
         <input
           className={styles.form_input}
           type="text"
@@ -83,7 +86,7 @@ const FormDriver = ({ active }: { active: boolean }) => {
       </label>
       {!active ? (
         <label>
-          Дата рождения
+          {t('driver_birth')}
           <input
             type="date"
             name="date_birth"
@@ -95,7 +98,7 @@ const FormDriver = ({ active }: { active: boolean }) => {
         </label>
       ) : (
         <label>
-          Дата рождения
+          {t('driver_birth')}
           <input
             disabled
             type="date"
@@ -108,7 +111,7 @@ const FormDriver = ({ active }: { active: boolean }) => {
         </label>
       )}
       <label>
-        Статус
+        {t('driver_status')}
         <select
           name="status"
           required
@@ -123,7 +126,7 @@ const FormDriver = ({ active }: { active: boolean }) => {
         </select>
       </label>
       <button className={styles.open__btn} type="submit">
-        Отправить
+        {t('button_send')}
       </button>
     </form>
   );
