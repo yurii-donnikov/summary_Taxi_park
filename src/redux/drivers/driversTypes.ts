@@ -18,4 +18,3 @@ export const UPDATE_DRIVER_REQUEST = 'drivers/updateDriverRequest';
 export const UPDATE_DRIVER_SUCCESS = 'drivers/updateDriverSuccess';
 export const UPDATE_DRIVER_ERROR = 'drivers/updateDriverError';
 
-

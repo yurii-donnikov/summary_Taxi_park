@@ -1,4 +1,4 @@
-import * as type from './driversTypes';
+ import * as type from './driversTypes';
 import {
   IDriversState,
   IAction,
