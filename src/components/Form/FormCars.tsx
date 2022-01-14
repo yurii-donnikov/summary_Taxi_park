@@ -15,7 +15,7 @@ interface IStatus {
   code: string;
 }
 
-const FormCar = () => {
+const FormCar = ({setActive}:{setActive: React.Dispatch<React.SetStateAction<boolean>>}) => {
   const getFullCarStatus = (status: string) => {
     return statuses.reduce((acc: IStatus, { title, code }) => {
       if (code === status) {
@@ -51,6 +51,7 @@ const FormCar = () => {
     onSubmit: values => {
       addCar(values);
       formik.resetForm();
+      setActive(false);
     },
   });
 
@@ -60,6 +61,7 @@ const FormCar = () => {
         Марка
         <input
           className={styles.form_input}
+          required
           type="text"
           name="mark"
           placeholder=" "
@@ -72,6 +74,7 @@ const FormCar = () => {
         Модель
         <input
           className={styles.form_input}
+          required
           type="text"
           name="model"
           placeholder=" "
@@ -84,6 +87,7 @@ const FormCar = () => {
         Год
         <input
           className={styles.form_input}
+          required
           type="number"
           name="year"
           min="1975"
@@ -98,6 +102,7 @@ const FormCar = () => {
         Номер
         <input
           className={styles.form_input}
+          required
           type="text"
           name="number"
           placeholder=" "
@@ -121,7 +126,7 @@ const FormCar = () => {
         </select>
       </label>
       <button className={styles.open__btn} type="submit">
-        Отправить
+        Создать
       </button>
     </form>
   );
