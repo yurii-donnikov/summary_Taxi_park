@@ -4,9 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { createDriverRequest } from '../../redux/drivers/driversActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDriverStatuses } from '../../redux/drivers/driversSelectors';
-import { useState } from 'react';
-
-
 interface IForm {
   first_name: string;
   last_name: string;
@@ -29,8 +26,8 @@ const FormDriver = ({
   const dispatch = useDispatch();
   const statuses = useSelector(getDriverStatuses);
 
-  const { t, i18n } = useTranslation();
-  
+  const { t } = useTranslation();
+
   const getFullDriverStatus = (status: string) => {
     return statuses.reduce((acc: IStatus, { title, code }) => {
       if (code === status) {
@@ -55,36 +52,34 @@ const FormDriver = ({
   const init = (active: boolean): IForm => {
     let temp;
     let temp2;
-    if(active){
+    if (active) {
       temp = {
         first_name: 'fffff',
         last_name: '',
         date_birth: '',
         status: '',
-      }
+      };
       return temp;
-    } 
-      temp2 = {
-        first_name: 'aaa',
-        last_name: 'aaaa',
-        date_birth: '',
-        status: '',
-      }
-      return temp2;
-    
+    }
+    temp2 = {
+      first_name: 'aaa',
+      last_name: 'aaaa',
+      date_birth: '',
+      status: '',
+    };
+    return temp2;
   };
 
-  
   const formik = useFormik({
     initialValues: init(active),
-    
+
     onSubmit: values => {
       if (!active) {
         addDriver(values);
         formik.resetForm();
         setActive(false);
       } else {
-        console.log("AAAAAAAAAAAAAAAAAAAAA")
+        console.log('AAAAAAAAAAAAAAAAAAAAA');
       }
     },
   });
@@ -161,16 +156,13 @@ const FormDriver = ({
       </label>
       {!active ? (
         <button className={styles.open__btn} type="submit">
-          Создать
+          {t('button_create')}
         </button>
       ) : (
         <button className={styles.open__btn} type="submit">
-          Изменить
+          {t('button_edit')}
         </button>
       )}
-      <button className={styles.open__btn} type="submit">
-        {t('button_send')}
-      </button>
     </form>
   );
 };

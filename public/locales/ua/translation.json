@@ -21,5 +21,7 @@
   "status_fired": "Звільнений",
   "button_add_driver": "Водій",
   "button_add_car": "Авто",
-  "button_send": "Відправити"
+  "button_send": "Відправити",
+  "button_create": "Створити",
+  "button_edit": "Змінити"
 }

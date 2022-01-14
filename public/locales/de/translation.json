@@ -21,5 +21,7 @@
   "status_fired": "Gefeuert",
   "button_add_driver": "Treiber",
   "button_add_car": "Auto",
-  "button_send": "Submit"
+  "button_send": "Submit",
+  "button_create": "Erstellen",
+  "button_edit": "Veränderung"
 }

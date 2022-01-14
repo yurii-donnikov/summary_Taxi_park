@@ -21,5 +21,7 @@
   "status_fired": "Fired",
   "button_add_driver": "Driver",
   "button_add_car": "Car",
-  "button_send": "Submit"
+  "button_send": "Submit",
+  "button_create": "Create",
+  "button_edit": "Edit"
 }
