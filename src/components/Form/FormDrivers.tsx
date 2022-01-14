@@ -1,8 +1,10 @@
-import * as React from 'react';
 import styles from './FormMain.module.scss';
-import { statuses } from '../carBase/CarBase';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
+import { createDriverRequest } from '../../redux/drivers/driversActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDriverStatuses } from '../../redux/drivers/driversSelectors';
+
 
 interface IForm {
   first_name: string;
@@ -17,14 +19,17 @@ interface IStatus {
 }
 
 const FormDriver = ({ active }: { active: boolean }) => {
+  const dispatch = useDispatch();
+  const statuses = useSelector(getDriverStatuses);
+
   const { t, i18n } = useTranslation();
+  
   const getFullDriverStatus = (status: string) => {
     return statuses.reduce((acc: IStatus, { title, code }) => {
       if (code === status) {
         acc.title = title;
         acc.code = code;
       }
-
       return acc;
     });
   };
@@ -36,10 +41,8 @@ const FormDriver = ({ active }: { active: boolean }) => {
       date_birth: Date.parse(data.date_birth),
       status: getFullDriverStatus(data.status),
     };
-    setTimeout(() => {
-      alert(JSON.stringify(driver, null, 2));
-    }, 400);
-    // dispatch(addDriverRequest(driver));
+
+    dispatch(createDriverRequest(driver));
   };
 
   const formik = useFormik({

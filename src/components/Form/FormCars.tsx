@@ -1,5 +1,4 @@
 import { useFormik } from 'formik';
-import * as React from 'react';
 import styles from './FormMain.module.scss';
 import { statuses } from '../carBase/CarBase';
 import { useTranslation } from 'react-i18next';
@@ -40,7 +39,7 @@ const FormCar = () => {
     setTimeout(() => {
       alert(JSON.stringify(car, null, 2));
     }, 400);
-    // dispatch(addDriverRequest(driver));
+    // dispatch(createCarRequest(car));
   };
 
   const formik = useFormik({

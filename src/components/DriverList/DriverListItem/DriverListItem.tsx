@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteDriverRequest,
   fetchDriversRequest,
+  fetchDriverStatusesRequest,
 } from '../../../redux/drivers/driversActions';
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
 import { useTranslation } from 'react-i18next';
@@ -19,6 +20,7 @@ const DriverItem = () => {
 
   useEffect(() => {
     dispatch(fetchDriversRequest());
+    dispatch(fetchDriverStatusesRequest())
   }, [dispatch]);
 
   const [modalActive, setModalActive] = useState(false);

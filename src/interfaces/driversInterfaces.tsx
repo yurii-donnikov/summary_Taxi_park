@@ -21,3 +21,9 @@ export interface IDriversState {
   drivers: IDriver[];
   statuses: IDriverStatus[];
 }
+
+
+export interface IUpdateDriver {
+  id: number;
+  newDriver: IDriver;
+}
