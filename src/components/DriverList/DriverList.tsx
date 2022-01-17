@@ -10,12 +10,10 @@ const DriverList = () => {
   const { t, i18n } = useTranslation();
   const [modalActive, setModalActive] = useState(false);
   const [formType, setFormType] = useState(false);
-  const [type, setType] = useState(false);
 
   const renderModalDriver = () => {
     setModalActive(true);
     setFormType(false);
-    setType(false);
   };
 
   return (
@@ -43,7 +41,7 @@ const DriverList = () => {
         <DriverItem />
       </ul>
       <Modal active={modalActive} setActive={setModalActive}>
-        {<FormDriver active={type} setActive={setModalActive}/>}
+        {<FormDriver setActive={setModalActive}/>}
       </Modal>
     </div>
   );

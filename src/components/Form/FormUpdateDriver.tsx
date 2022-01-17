@@ -18,7 +18,7 @@ interface IStatus {
   code: string;
 }
 
-const FormDriver = ({
+const FormUpdateDriver = ({
   setActive,
 }: {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -38,7 +38,7 @@ const FormDriver = ({
     });
   };
 
-  const addDriver = (data: IForm) => {
+  const updateDriver = (data: IForm) => {
     const driver = {
       first_name: data.first_name,
       last_name: data.last_name,
@@ -58,7 +58,7 @@ const FormDriver = ({
     },
 
     onSubmit: values => {
-        addDriver(values);
+      updateDriver(values);
         formik.resetForm();
         setActive(false);
     },
@@ -92,18 +92,6 @@ const FormDriver = ({
           value={formik.values.last_name}
         />
       </label>
-        <label>
-          {t('driver_birth')}
-          <input
-            required
-            type="date"
-            name="date_birth"
-            min="1970-01-01"
-            max="2004-01-01"
-            onChange={formik.handleChange}
-            value={formik.values.date_birth}
-          />
-        </label>
       <label>
         {t('driver_status')}
         <select
@@ -120,10 +108,10 @@ const FormDriver = ({
         </select>
       </label>
         <button className={styles.open__btn} type="submit">
-          {t('button_create')}
+          {t('button_edit')}
         </button>
     </form>
   );
 };
 
-export default FormDriver;
+export default FormUpdateDriver;

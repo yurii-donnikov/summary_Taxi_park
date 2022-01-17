@@ -12,6 +12,7 @@ import {
 } from '../../../redux/drivers/driversActions';
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
 import { useTranslation } from 'react-i18next';
+import FormUpdateDriver from '../../Form/FormUpdateDriver';
 
 const DriverItem = () => {
   const { t, i18n } = useTranslation();
@@ -25,12 +26,10 @@ const DriverItem = () => {
 
   const [modalActive, setModalActive] = useState(false);
   const [formType, setFormType] = useState(false);
-  const [type, setType] = useState(true);
 
   const modifyDriver = () => {
     setModalActive(true);
     setFormType(false);
-    setType(true);
   }
 
   const renderModalCar = () => {
@@ -94,7 +93,7 @@ const DriverItem = () => {
         </li>
       ))}
       <Modal active={modalActive} setActive={setModalActive}>
-        {formType ? <FormCar setActive={setModalActive}/> : <FormDriver active={type} setActive={setModalActive}/>}
+        {formType ? <FormCar setActive={setModalActive}/> : <FormUpdateDriver setActive={setModalActive}/>}
       </Modal>
     </>
   );
