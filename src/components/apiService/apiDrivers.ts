@@ -30,12 +30,23 @@ export async function deleteDriver(id: number): Promise<void> {
   await axios.delete(`/driver/${id}/`);
 }
 
+
+interface updateCurDriver {
+  id: number;
+  first_name: string;
+  last_name: string;
+  // status: {
+  //   title: string;
+  //   code: string;
+  // };
+}
+
 export async function updateDriver(
   id: number,
-  newDriver: IDriver,
-): Promise<IDriver> {
+  newDriver: updateCurDriver,
+): Promise<updateCurDriver> {
   const response = await axios.patch(`/driver/${id}/`, newDriver);
-  const { data }: { data: IDriver } = response.data;
+  const { data } = response.data;
 
   return data;
 }

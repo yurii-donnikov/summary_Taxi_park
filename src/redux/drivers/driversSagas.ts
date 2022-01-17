@@ -16,6 +16,7 @@ import {
   IDriver,
   IDriverStatus,
   IUpdateDriver,
+  updateCurDriver,
 } from '../../interfaces/driversInterfaces';
 import {
   createDriver,
@@ -68,12 +69,16 @@ function* fetchDriverStatusesWorker(): Generator {
   }
 }
 
-function* updateDriverWorker<T extends IUpdateDriver>({
+function* updateDriverWorker<T extends updateCurDriver>({
   payload,
 }: IParams<T>): Generator {
   try {
-    const driver = yield call(updateDriver, payload.id, payload.newDriver);
+    console.log("payload",payload)
+    console.log("payload.id >>",payload.id)
+    // console.log(" payload.newDriver >>", payload.newDriver)
+    const driver = yield call(updateDriver, payload.id, payload);
     yield put(updateDriverSuccess(driver));
+    console.log("driver >>>",driver)
   } catch (error) {
     yield put(updateDriverError(error));
   }

@@ -1,5 +1,10 @@
+import { IDriver } from './../../interfaces/driversInterfaces';
 import * as type from './driversTypes';
-import { IDriversState, IAction, IUpdateDriver } from '../../interfaces/driversInterfaces';
+import {
+  IDriversState,
+  IAction,
+  IUpdateDriver,
+} from '../../interfaces/driversInterfaces';
 
 const initialState: IDriversState = {
   drivers: [],
@@ -33,10 +38,14 @@ const driversReducer = (state = initialState, action: IAction) => {
     case type.UPDATE_DRIVER_SUCCESS:
       return {
         ...state,
-        drivers: state.drivers.map(driver =>
-          driver.id !== action.payload ? driver : action.payload,
-        ),
+        drivers: [
+          ...state.drivers.map(driver =>
+            driver.id !== action.payload.id ? driver :{...driver, ...action.payload},
+          ),
+        ],
       };
+
+
 
     default:
       return state;

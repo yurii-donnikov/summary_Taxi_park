@@ -1,15 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DriverItem from './DriverListItem/DriverListItem';
 import Modal from '../Modal/Modal';
 import styles from './DriverList.module.scss';
 import sprite from '../../icons/symbol-defs.svg';
 import FormDriver from '../Form/FormDrivers';
 import { useTranslation } from 'react-i18next';
+import { fetchDriversRequest, fetchDriverStatusesRequest } from '../../redux/drivers/driversActions';
+import { useDispatch } from 'react-redux';
 
 const DriverList = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [modalActive, setModalActive] = useState(false);
   const [formType, setFormType] = useState(false);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchDriversRequest());
+    dispatch(fetchDriverStatusesRequest());
+
+  }, [dispatch]);
 
   const renderModalDriver = () => {
     setModalActive(true);

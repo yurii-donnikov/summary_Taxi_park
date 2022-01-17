@@ -14,7 +14,7 @@ export interface IDriver {
 
 export interface IAction {
   type: string;
-  payload: number;
+  payload: number | any;
 }
 
 export interface IDriversState {
@@ -25,5 +25,13 @@ export interface IDriversState {
 
 export interface IUpdateDriver {
   id: number;
-  newDriver: IDriver;
+  newDriver: updateCurDriver;
+}
+
+// ====
+export interface updateCurDriver {
+  id: number;
+  first_name: string;
+  last_name: string;
+ 
 }
