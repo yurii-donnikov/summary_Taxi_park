@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+
+  client:
+
+    container_name: docker_start
+    build: ./
+    volumes:
+      - './:/app'
+      - '/app/node_modules'
+    ports:
+      - 3000:3000
