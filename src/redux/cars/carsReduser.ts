@@ -19,6 +19,10 @@ switch(action.type){
         ...state,
         cars: state.cars.filter(car => Number(car.id) !== action.payload),
       };
+    case ActionTypesCar.FETCH_CARS_DRIVER_SUCCESS:
+      return {
+        ...state, cars: action.payload
+      };
     default:
      return state;
 }

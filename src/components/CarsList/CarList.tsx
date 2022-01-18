@@ -1,10 +1,14 @@
 import React, {useState} from "react";
-import CarItem from "./CarsListItem/CarListItem";
+import CarItem from "./CarsListItem/CarItem";
 import styles from "./CarList.module.scss";
 import Modal from "../Modal/Modal";
 import sprite from "../../icons/symbol-defs.svg";
+import { useParams } from "react-router-dom";
+import CarsItemDriver from './CarsListItem/CarsItemDriver';
 
 const CarList = () => {
+    const {id} =useParams();
+    
     return (
         <div className={styles.list__contsiner}>
             <ul className={styles.list__header}>
@@ -19,7 +23,7 @@ const CarList = () => {
                 <li></li>
             </ul>
             <ul>
-                <CarItem/>
+                {id ? <CarsItemDriver id={id}/> : <CarItem />}    
            </ul>
         </div>
 

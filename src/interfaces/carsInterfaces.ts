@@ -18,4 +18,15 @@ export interface IAction{
   type: string,
   payload: number,
 }
-
+export interface PropsCars{
+  carId: number,
+  driverStatus: string,
+  driverId: number,
+  driverName: string,
+  driverLastName: string,
+  carModel: string,
+  carMark: string,
+  carYear: number,
+  carNumber: string,
+  carStatus: string,
+}

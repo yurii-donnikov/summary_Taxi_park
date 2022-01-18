@@ -6,13 +6,18 @@ import sprite from '../../../icons/symbol-defs.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCars } from '../../../redux/cars/carsSelectors';
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
-import { fetchCarsRequest, deleteCarRequest } from '../../../redux/cars/carsActions';
+import {
+  fetchCarsRequest,
+  deleteCarRequest,
+} from '../../../redux/cars/carsActions';
 import { fetchDriversRequest } from '../../../redux/drivers/driversActions';
+import CarsTable from './CarsTable';
+import { useParams } from 'react-router-dom';
 
 const CarItem = () => {
   const dispatch = useDispatch();
   const cars = useSelector(getCars);
-
+const id = useParams();
   useEffect(() => {
     dispatch(fetchCarsRequest());
   }, [dispatch]);
@@ -31,34 +36,22 @@ const CarItem = () => {
     <>
       {cars.map(car => (
         <li key={car.id} className={styles.data_list}>
-          <p>{car.id}</p>
-
           {drivers
             .filter(driver => driver.id === car.driver_id)
             .map(driver => (
-              <p title={driver.status.title} key={driver.id}>
-                {driver.first_name + ' ' + driver.last_name}
-              </p>
+              <CarsTable
+                driverName={driver.first_name}
+                driverId={driver.id}
+                carId={car.id}
+                driverLastName={driver.last_name}
+                driverStatus={driver.status.title}
+                carModel={car.model}
+                carMark={car.mark}
+                carYear={car.year}
+                carNumber={car.number}
+                carStatus={car.status.title}
+              />
             ))}
-
-          <p>{car.model}</p>
-
-          <p>{car.mark}</p>
-
-          <p>{car.year}</p>
-
-          <p>{car.number}</p>
-
-          <p>{car.status.title}</p>
-
-          <button id={car.id.toString()}
-              onClick={handlerDeleteBtn}>
-            <svg className={styles.icon}>
-              <use href={sprite + '#icon-TypeDendie'} />
-            </svg>
-          </button>
-
-          <p></p>
         </li>
       ))}
     </>
