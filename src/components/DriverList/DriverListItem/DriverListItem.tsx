@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import styles from '../DriverList.module.scss';
 import sprite from '../../../icons/symbol-defs.svg';
 import Modal from '../../Modal/Modal';
-import FormDriver from '../../Form/FormDrivers';
 import FormCar from '../../Form/FormCars';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -15,22 +14,38 @@ import { useTranslation } from 'react-i18next';
 import FormUpdateDriver from '../../Form/FormUpdateDriver';
 
 const DriverItem = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const drivers = useSelector(getDrivers);
 
+  const [currentDriver, setCurrentDriver] = useState({
+    id: 0,
+    first_name: '',
+    last_name: '',
+    status: {
+      title: '',
+      code: '',
+    },
+  });
+
   useEffect(() => {
     dispatch(fetchDriversRequest());
-    dispatch(fetchDriverStatusesRequest())
+    dispatch(fetchDriverStatusesRequest());
   }, [dispatch]);
 
   const [modalActive, setModalActive] = useState(false);
   const [formType, setFormType] = useState(false);
 
-  const modifyDriver = () => {
+  const modifyDriver = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    const currentDriverId = Number(event.currentTarget.id);
+    const curDriver = drivers.filter(driver => driver.id === currentDriverId);
+
+    setCurrentDriver(curDriver[0]);
+
     setModalActive(true);
     setFormType(false);
-  }
+  };
 
   const renderModalCar = () => {
     setModalActive(true);
@@ -38,6 +53,7 @@ const DriverItem = () => {
   };
 
   const handlerDeleteBtn = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     const driverId = Number(event.currentTarget.id);
 
     dispatch(deleteDriverRequest(driverId));
@@ -57,7 +73,11 @@ const DriverItem = () => {
           <p>{driver.status.title}</p>
 
           <div>
-            <button className={styles.ico__btn} onClick={modifyDriver}>
+            <button
+              id={driver.id.toString()}
+              className={styles.ico__btn}
+              onClick={modifyDriver}
+            >
               <svg className={styles.icon}>
                 <use href={sprite + '#icon-TypeEdit'} />
               </svg>
@@ -93,7 +113,14 @@ const DriverItem = () => {
         </li>
       ))}
       <Modal active={modalActive} setActive={setModalActive}>
-        {formType ? <FormCar setActive={setModalActive}/> : <FormUpdateDriver setActive={setModalActive}/>}
+        {formType ? (
+          <FormCar setActive={setModalActive} />
+        ) : (
+          <FormUpdateDriver
+            setActive={setModalActive}
+            currentDriver={currentDriver}
+          />
+        )}
       </Modal>
     </>
   );

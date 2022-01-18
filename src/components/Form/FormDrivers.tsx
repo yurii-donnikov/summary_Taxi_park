@@ -4,19 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { createDriverRequest } from '../../redux/drivers/driversActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDriverStatuses } from '../../redux/drivers/driversSelectors';
-
-
-interface IForm {
-  first_name: string;
-  last_name: string;
-  date_birth: string;
-  status: string;
-}
-
-interface IStatus {
-  title: string;
-  code: string;
-}
+import { IDriverStatus, IFormDriver } from '../../interfaces/driversInterfaces';
 
 const FormDriver = ({
   setActive,
@@ -29,7 +17,7 @@ const FormDriver = ({
   const { t } = useTranslation();
 
   const getFullDriverStatus = (status: string) => {
-    return statuses.reduce((acc: IStatus, { title, code }) => {
+    return statuses.reduce((acc: IDriverStatus, { title, code }) => {
       if (code === status) {
         acc.title = title;
         acc.code = code;
@@ -38,7 +26,7 @@ const FormDriver = ({
     });
   };
 
-  const addDriver = (data: IForm) => {
+  const addDriver = (data: IFormDriver) => {
     const driver = {
       first_name: data.first_name,
       last_name: data.last_name,
@@ -47,6 +35,7 @@ const FormDriver = ({
     };
 
     dispatch(createDriverRequest(driver));
+    
   };
 
   const formik = useFormik({
@@ -58,9 +47,9 @@ const FormDriver = ({
     },
 
     onSubmit: values => {
-        addDriver(values);
-        formik.resetForm();
-        setActive(false);
+      addDriver(values);
+      formik.resetForm();
+      setActive(false);
     },
   });
 
@@ -92,18 +81,18 @@ const FormDriver = ({
           value={formik.values.last_name}
         />
       </label>
-        <label>
-          {t('driver_birth')}
-          <input
-            required
-            type="date"
-            name="date_birth"
-            min="1970-01-01"
-            max="2004-01-01"
-            onChange={formik.handleChange}
-            value={formik.values.date_birth}
-          />
-        </label>
+      <label>
+        {t('driver_birth')}
+        <input
+          required
+          type="date"
+          name="date_birth"
+          min="1970-01-01"
+          max="2004-01-01"
+          onChange={formik.handleChange}
+          value={formik.values.date_birth}
+        />
+      </label>
       <label>
         {t('driver_status')}
         <select
@@ -112,16 +101,18 @@ const FormDriver = ({
           onChange={formik.handleChange}
           value={formik.values.status}
         >
-          {statuses.map((status: IStatus) => (
-            <option key={status.code} value={status.code}>
+          <option disabled value="" label=""></option>
+
+          {statuses.map((status: IDriverStatus, index) => (
+            <option key={index} value={status.code}>
               {status.title}
             </option>
           ))}
         </select>
       </label>
-        <button className={styles.open__btn} type="submit">
-          {t('button_create')}
-        </button>
+      <button className={styles.open__btn} type="submit">
+        {t('button_create')}
+      </button>
     </form>
   );
 };
