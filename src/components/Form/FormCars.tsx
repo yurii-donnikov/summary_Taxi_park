@@ -1,30 +1,35 @@
 import { useFormik } from 'formik';
 import styles from './FormMain.module.scss';
-import { statuses } from '../carBase/CarBase';
+// import { statuses } from '../carBase/CarBase';
 import { useTranslation } from 'react-i18next';
+import { getCarsStatuses } from '../../redux/cars/carsSelectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { IStatusCar } from '../../interfaces/carsInterfaces';
+import { createCarRequest } from '../../redux/cars/carsActions';
 
-interface IForm {
+interface IFormCar {
+  driver_id: number;
   mark: string;
   model: string;
-  year: string;
+  year: number;
   number: string;
   status: string;
 }
 
-interface IStatus {
-  title: string;
-  code: string;
-}
-
 const FormCar = ({
   setActive,
+  currentDriverId,
 }: {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  currentDriverId: number;
 }) => {
   const { t } = useTranslation();
 
+  const dispatch = useDispatch();
+  const statusesCar = useSelector(getCarsStatuses);
+
   const getFullCarStatus = (status: string) => {
-    return statuses.reduce((acc: IStatus, { title, code }) => {
+    return statusesCar.reduce((acc: IStatusCar, { title, code }) => {
       if (code === status) {
         acc.title = title;
         acc.code = code;
@@ -33,25 +38,25 @@ const FormCar = ({
     });
   };
 
-  const addCar = (data: IForm) => {
+  const addCar = (data: IFormCar) => {
     const car = {
+      driver_id: currentDriverId,
       mark: data.mark,
       model: data.model,
-      year: Date.parse(data.year),
+      year: data.year,
       number: data.number,
       status: getFullCarStatus(data.status),
     };
-    setTimeout(() => {
-      alert(JSON.stringify(car, null, 2));
-    }, 400);
-    // dispatch(createCarRequest(car));
+
+    dispatch(createCarRequest(car));
   };
 
   const formik = useFormik({
     initialValues: {
+      driver_id: 0,
       mark: '',
       model: '',
-      year: '',
+      year: 0,
       number: '',
       status: '',
     },
@@ -119,14 +124,17 @@ const FormCar = ({
         />
       </label>
       <label>
+      Статус
         <select
           name="status"
           required
           onChange={formik.handleChange}
           value={formik.values.status}
         >
-          {statuses.map((status: IStatus) => (
-            <option key={status.code} value={status.code}>
+          <option disabled value="" label=""></option>
+
+          {statusesCar.map((status: IStatusCar, index) => (
+            <option key={index} value={status.code}>
               {status.title}
             </option>
           ))}

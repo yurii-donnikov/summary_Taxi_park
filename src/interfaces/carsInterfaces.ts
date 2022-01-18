@@ -16,7 +16,7 @@ export interface ICar{
 
 export interface IAction{
   type: string,
-  payload: number,
+  payload: any,
 }
 export interface PropsCars{
   carId: number,
@@ -30,3 +30,4 @@ export interface PropsCars{
   carNumber: string,
   carStatus: string,
 }
+

@@ -13,6 +13,7 @@ import { getDrivers } from '../../../redux/drivers/driversSelectors';
 import { useTranslation } from 'react-i18next';
 import FormUpdateDriver from '../../Form/FormUpdateDriver';
 import { Link } from 'react-router-dom';
+import { fetchCarStatusesRequest } from '../../../redux/cars/carsActions';
 
 const DriverItem = () => {
   const { t } = useTranslation();
@@ -34,9 +35,9 @@ const DriverItem = () => {
     dispatch(fetchDriverStatusesRequest());
   }, [dispatch]);
 
-
   const [modalActive, setModalActive] = useState(false);
   const [formType, setFormType] = useState(false);
+  const [currentDriverId, setCurrentDriverId] = useState(0);
 
   const modifyDriver = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -49,7 +50,15 @@ const DriverItem = () => {
     setFormType(false);
   };
 
-  const renderModalCar = () => {
+  const renderModalCar = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    const currentDriverId = Number(event.currentTarget.id);
+
+    dispatch(fetchCarStatusesRequest());
+
+    setCurrentDriverId(currentDriverId);
+
+
     setModalActive(true);
     setFormType(true);
   };
@@ -60,8 +69,6 @@ const DriverItem = () => {
 
     dispatch(deleteDriverRequest(driverId));
   };
-
-
 
   return (
     <>
@@ -87,10 +94,11 @@ const DriverItem = () => {
               </svg>
             </button>
 
-            <button className={styles.ico__btn}><Link to={`/cars/${driver.id}`}>
-              <svg className={styles.icon}>
-                <use href={sprite + '#icon-TypeWatch'} />
-              </svg>
+            <button className={styles.ico__btn}>
+              <Link to={`/cars/${driver.id}`}>
+                <svg className={styles.icon}>
+                  <use href={sprite + '#icon-TypeWatch'} />
+                </svg>
               </Link>
             </button>
 
@@ -106,7 +114,7 @@ const DriverItem = () => {
           </div>
 
           <button
-            data-value={'car'}
+            id={driver.id.toString()}
             className={styles.car__btn}
             onClick={renderModalCar}
           >
@@ -119,7 +127,7 @@ const DriverItem = () => {
       ))}
       <Modal active={modalActive} setActive={setModalActive}>
         {formType ? (
-          <FormCar setActive={setModalActive} />
+          <FormCar setActive={setModalActive} currentDriverId={currentDriverId} />
         ) : (
           <FormUpdateDriver
             setActive={setModalActive}

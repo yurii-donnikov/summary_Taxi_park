@@ -6,3 +6,4 @@ export const getDrivers = (state: IDriverState): IDriver[] =>
 
 export const getDriverStatuses = (state: IDriverState): IDriverStatus[] =>
   state.drivers.statuses;
+
