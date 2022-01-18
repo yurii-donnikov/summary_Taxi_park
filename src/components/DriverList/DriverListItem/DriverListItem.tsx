@@ -12,6 +12,7 @@ import {
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
 import { useTranslation } from 'react-i18next';
 import FormUpdateDriver from '../../Form/FormUpdateDriver';
+import { Link } from 'react-router-dom';
 
 const DriverItem = () => {
   const { t } = useTranslation();
@@ -32,6 +33,7 @@ const DriverItem = () => {
     dispatch(fetchDriversRequest());
     dispatch(fetchDriverStatusesRequest());
   }, [dispatch]);
+
 
   const [modalActive, setModalActive] = useState(false);
   const [formType, setFormType] = useState(false);
@@ -59,6 +61,8 @@ const DriverItem = () => {
     dispatch(deleteDriverRequest(driverId));
   };
 
+
+
   return (
     <>
       {drivers.map(driver => (
@@ -83,10 +87,11 @@ const DriverItem = () => {
               </svg>
             </button>
 
-            <button className={styles.ico__btn}>
+            <button className={styles.ico__btn}><Link to={`/cars/${driver.id}`}>
               <svg className={styles.icon}>
                 <use href={sprite + '#icon-TypeWatch'} />
               </svg>
+              </Link>
             </button>
 
             <button
