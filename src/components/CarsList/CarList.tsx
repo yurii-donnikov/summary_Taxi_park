@@ -6,7 +6,7 @@ import sprite from '../../icons/symbol-defs.svg';
 import { useParams } from 'react-router-dom';
 
 const CarList = () => {
-  const { id } = useParams();
+
 
   return (
     <div className={styles.list__contsiner}>
@@ -21,7 +21,7 @@ const CarList = () => {
         <li>Действия</li>
         <li></li>
       </ul>
-      <ul>{id ? <CarItem id={id} /> : <CarItem />}</ul>
+      <ul><CarItem /></ul>
     </div>
   );
 };

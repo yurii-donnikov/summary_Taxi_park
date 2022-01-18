@@ -4,7 +4,7 @@ import BreadcrambsCars from '../../components/Breadcrambs/BreadcrambsCars';
 import CarList from '../../components/CarsList/CarList';
 function Cars(): JSX.Element {
     const idDriver = useParams();
-    console.log(idDriver);
+  
     return (
         <>
         <BreadcrambsCars/>

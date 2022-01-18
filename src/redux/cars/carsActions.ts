@@ -1,3 +1,4 @@
+import { ICar } from "../../interfaces/carsInterfaces";
 import { ActionTypesCar } from "../cars/carsTypes";
 
 interface IAction<P> {
@@ -8,7 +9,7 @@ export const fetchCarsRequest = <P>(): IAction<P> => ({
     type: ActionTypesCar.FETCH_CARS_REQUEST,
   });
   
-  export const fetchCarsSuccess = <P>(data: P): IAction<P> => ({
+  export const fetchCarsSuccess = (data: ICar[]): IAction<ICar[]> => ({
     type: ActionTypesCar.FETCH_CARS_SUCCESS,
     payload: data,
   });

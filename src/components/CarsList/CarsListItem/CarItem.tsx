@@ -9,21 +9,24 @@ import {
 } from '../../../redux/cars/carsActions';
 import { fetchDriversRequest } from '../../../redux/drivers/driversActions';
 import CarsTable from './CarsTable';
+import { useParams } from 'react-router-dom';
 
-interface CarsDriver {
-  id?: string;
-}
 
-const CarItem = (props: CarsDriver) => {
+const CarItem = () => {
   const dispatch = useDispatch();
-  const cars = useSelector(getCars);
+  const { id } = useParams();
+  let cars = useSelector(getCars);
+  
+ 
 
   useEffect(() => {
-    if (props.id) {
-      dispatch(fetchCarsByIdDriverRequest(Number(props.id)));
+    if (id) {
+      dispatch(fetchCarsByIdDriverRequest(Number(id)));
+    }else {
+      dispatch(fetchCarsRequest());
     }
-    dispatch(fetchCarsRequest());
-  }, [dispatch]);
+    
+  }, [dispatch, id]);
 
   const drivers = useSelector(getDrivers);
 
@@ -48,6 +51,7 @@ const CarItem = (props: CarsDriver) => {
                 carYear={car.year}
                 carNumber={car.number}
                 carStatus={car.status.title}
+                key={driver.id}
               />
             ))}
         </li>

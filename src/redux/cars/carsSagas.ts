@@ -11,8 +11,8 @@ interface IParams<T> {
 
 function* fetchCarsWorker(){
     try{
-    const drivers = (yield call(fetchCars)) as ICar[];
-    yield put(fetchCarsSuccess(drivers));
+    const cars = (yield call(fetchCars)) as ICar[];
+    yield put(fetchCarsSuccess(cars));
     } catch{
 
     }

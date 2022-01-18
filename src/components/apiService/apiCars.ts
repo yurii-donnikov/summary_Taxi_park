@@ -8,12 +8,15 @@ axios.defaults.headers.common['X-Authorization'] =
   export async function fetchCars() {
     const response = await axios.get('/car/');
     const { data } = response.data;
+    
     return data;
   }
  export async function fetchCarsByIdDriver(id: number){
-  axios.defaults.headers.common['E-Driver-Id'] =
-  `${id}`;
-  const response = await axios.get(`/car/`);
+  const response = await axios.get(`/car/`, {
+    headers: {
+      'E-Driver-Id': String(id)
+    }
+  });
   const {data} = response.data;
   return data;
  }
