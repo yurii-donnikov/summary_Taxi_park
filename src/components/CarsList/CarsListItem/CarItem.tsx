@@ -1,24 +1,27 @@
-import React from 'react';
-import cars from '../../carBase/CarBase';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styles from '../CarList.module.scss';
-import sprite from '../../../icons/symbol-defs.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCars } from '../../../redux/cars/carsSelectors';
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
 import {
   fetchCarsRequest,
-  deleteCarRequest,
+  fetchCarsByIdDriverRequest,
 } from '../../../redux/cars/carsActions';
 import { fetchDriversRequest } from '../../../redux/drivers/driversActions';
 import CarsTable from './CarsTable';
-import { useParams } from 'react-router-dom';
 
-const CarItem = () => {
+interface CarsDriver {
+  id?: string;
+}
+
+const CarItem = (props: CarsDriver) => {
   const dispatch = useDispatch();
   const cars = useSelector(getCars);
-const id = useParams();
+
   useEffect(() => {
+    if (props.id) {
+      dispatch(fetchCarsByIdDriverRequest(Number(props.id)));
+    }
     dispatch(fetchCarsRequest());
   }, [dispatch]);
 
@@ -27,11 +30,6 @@ const id = useParams();
   useEffect(() => {
     dispatch(fetchDriversRequest());
   }, [dispatch]);
-
-  const handlerDeleteBtn = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const carId = Number(event.currentTarget.id);
-    dispatch(deleteCarRequest(carId));
-  };
   return (
     <>
       {cars.map(car => (

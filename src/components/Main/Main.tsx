@@ -14,7 +14,6 @@ const Main = () => {
         <Route path="/drivers" element={<Drivers />} />
         <Route path="/cars" element={<Cars />} />
         <Route path="/cars/:id" element={<Cars />}/>
-        
       </Routes>
     </main>
   );

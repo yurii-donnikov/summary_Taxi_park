@@ -3,10 +3,12 @@ import { ActionTypesCar } from "../cars/carsTypes";
 
 type State = {
     cars: ICar[],
+    carsDriver: ICar[],
 }
 
 const initialState: State = {
     cars: [],
+    carsDriver: [],
 }
 
 
@@ -21,7 +23,7 @@ switch(action.type){
       };
     case ActionTypesCar.FETCH_CARS_DRIVER_SUCCESS:
       return {
-        ...state, cars: action.payload
+        ...state, carsDriver: action.payload
       };
     default:
      return state;
