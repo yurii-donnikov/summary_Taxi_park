@@ -35,3 +35,33 @@ export const fetchCarsRequest = <P>(): IAction<P> => ({
     type: ActionTypesCar.DELETE_CARS_ERROR,
     payload: data,
   });
+
+  export const fetchCarStatusesRequest = <P>(): IAction<P> => ({
+    type: ActionTypesCar.FETCH_CARS_STATUSES_REQUEST,
+    
+  });
+  
+  export const fetchCarStatusesSuccess = <P>(data: P): IAction<P> => ({
+    type: ActionTypesCar.FETCH_CARS_STATUSES_SUCCESS,
+    payload: data,
+  });
+  
+  export const fetchCarStatusesError = <P>(data: P): IAction<P> => ({
+    type: ActionTypesCar.FETCH_CARS_STATUSES_ERROR,
+    payload: data,
+  });
+
+  export const createCarRequest = <P>(data: P): IAction<P> => ({
+    type: ActionTypesCar.CREATE_CARS_REQUEST,
+    payload: data,
+  });
+  
+  export const createCarSuccess = <P>(data: P): IAction<P> => ({
+    type: ActionTypesCar.CREATE_CARS_SUCCESS,
+    payload: data,
+  });
+  
+  export const createCarError = <P>(data: P): IAction<P> => ({
+    type: ActionTypesCar.CREATE_CARS_ERROR,
+    payload: data,
+  });

@@ -27,8 +27,6 @@ const CarsTable = (props: PropsCars) => {
           <use href={sprite + '#icon-TypeDendie'} />
         </svg>
       </button>
-
-      <p></p>
     </>
   );
 };

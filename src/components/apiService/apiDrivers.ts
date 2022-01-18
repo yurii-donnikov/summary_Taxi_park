@@ -35,10 +35,7 @@ interface updateCurDriver {
   id: number;
   first_name: string;
   last_name: string;
-  // status: {
-  //   title: string;
-  //   code: string;
-  // };
+ 
 }
 
 export async function updateDriver(
