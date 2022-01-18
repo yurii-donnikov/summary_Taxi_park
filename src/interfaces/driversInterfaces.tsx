@@ -11,10 +11,16 @@ export interface IDriver {
   date_birth: number;
   status: IDriverStatus;
 }
+export interface IDriverState {
+  drivers: {
+    drivers: IDriver[];
+    statuses: IDriverStatus[];
+  };
+}
 
 export interface IAction {
   type: string;
-  payload: number | any;
+  payload: any;
 }
 
 export interface IDriversState {
@@ -22,16 +28,25 @@ export interface IDriversState {
   statuses: IDriverStatus[];
 }
 
-
-export interface IUpdateDriver {
+export interface IActionUpdateDriver {
   id: number;
-  newDriver: updateCurDriver;
+  newDriver: IUpdatedDriver;
 }
 
 // ====
-export interface updateCurDriver {
+export interface IUpdatedDriver {
   id: number;
   first_name: string;
   last_name: string;
- 
+  status: string;
 }
+
+
+// 
+export interface IFormDriver {
+  first_name: string;
+  last_name: string;
+  date_birth: string;
+  status: string ;
+}
+

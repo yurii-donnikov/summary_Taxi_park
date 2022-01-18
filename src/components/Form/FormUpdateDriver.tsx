@@ -2,15 +2,23 @@ import styles from './FormMain.module.scss';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import {
-  fetchDriversRequest,
   fetchDriverStatusesRequest,
   updateDriverRequest,
 } from '../../redux/drivers/driversActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDriverStatuses } from '../../redux/drivers/driversSelectors';
-import { IDriverStatus, IDriver } from '../../interfaces/driversInterfaces';
-import { updateDriver } from '../apiService/apiDrivers';
-import { useEffect } from 'react';
+import {
+  IDriver,
+  IDriverStatus,
+  IUpdatedDriver,
+} from '../../interfaces/driversInterfaces';
+
+// interface IDriver {
+//   id: number;
+//   first_name: string;
+//   last_name: string;
+//   status: IDriverStatus;
+// }
 
 const FormUpdateDriver = ({
   setActive,
@@ -24,37 +32,32 @@ const FormUpdateDriver = ({
 
   const { t } = useTranslation();
 
-  // console.log("currentDriver >>>>", currentDriver);
-
-  // const getFullDriverStatus = (status: IDriverStatus) => {
-  //   return statuses.reduce((acc: IDriverStatus, { title, code }) => {
-  //     if (code === status.code) {
-  //       acc.title = title;
-  //       acc.code = code;
-  //     }
-  //     return acc;
-  //   });
-  // };
-
-  interface updateCurDriver {
-    first_name: string;
-    last_name: string;
-  }
-
-  const initialCurrentDriver: Partial<IDriver> = {
-    first_name: '',
-    last_name: '',
+  const getFullDriverStatus = (status: string) => {
+    return statuses.reduce((acc: IDriverStatus, { title, code }) => {
+      if (code === status) {
+        acc.title = title;
+        acc.code = code;
+      }
+      return acc;
+    });
   };
 
-  const updateCurrentDriver = (data: Partial<IDriver>) => {
+  const initialCurrentDriver: IUpdatedDriver = {
+    id: 0,
+    first_name: '',
+    last_name: '',
+    status: '',
+  };
+
+  const updateCurrentDriver = (data: IUpdatedDriver) => {
     const newDriver = {
       id: currentDriver.id,
       first_name: data.first_name,
       last_name: data.last_name,
+      status: getFullDriverStatus(data.status),
     };
 
     dispatch(updateDriverRequest(newDriver));
-
   };
 
   const formik = useFormik({
@@ -64,6 +67,8 @@ const FormUpdateDriver = ({
       updateCurrentDriver(values);
       formik.resetForm();
       setActive(false);
+
+      dispatch(fetchDriverStatusesRequest());
     },
   });
 
@@ -73,10 +78,9 @@ const FormUpdateDriver = ({
         {t('driver_name')}
         <input
           className={styles.form_input}
-          required
           type="text"
           name="first_name"
-          placeholder=" "
+          placeholder={currentDriver.first_name}
           pattern="[A-ZА-Я]{1}[a-zа-я]{1,15}"
           onChange={formik.handleChange}
           value={formik.values.first_name}
@@ -86,30 +90,31 @@ const FormUpdateDriver = ({
         {t('driver_surname')}
         <input
           className={styles.form_input}
-          required
           type="text"
           name="last_name"
-          placeholder=" "
+          placeholder={currentDriver.last_name}
           pattern="[A-ZА-Я]{1}[a-zа-я]{1,15}"
           onChange={formik.handleChange}
           value={formik.values.last_name}
         />
       </label>
-      {/* <label>
+      <label>
         {t('driver_status')}
         <select
           name="status"
-          required
           onChange={formik.handleChange}
-          value={formik.values.status?.code}
+          value={formik.values.status}
         >
-          {statuses.map((status: IDriverStatus) => (
-            <option key={status.code} value={status.code}>
+          <option disabled value="" label="">
+            {currentDriver.status?.title}
+          </option>
+          {statuses.map((status: IDriverStatus, index) => (
+            <option key={index} value={status.code}>
               {status.title}
             </option>
           ))}
         </select>
-      </label> */}
+      </label>
       <button className={styles.open__btn} type="submit">
         {t('button_edit')}
       </button>

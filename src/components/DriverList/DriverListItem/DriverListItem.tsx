@@ -2,14 +2,12 @@ import { useEffect, useState } from 'react';
 import styles from '../DriverList.module.scss';
 import sprite from '../../../icons/symbol-defs.svg';
 import Modal from '../../Modal/Modal';
-import FormDriver from '../../Form/FormDrivers';
 import FormCar from '../../Form/FormCars';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteDriverRequest,
   fetchDriversRequest,
   fetchDriverStatusesRequest,
-  updateDriverRequest,
 } from '../../../redux/drivers/driversActions';
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
 import { useTranslation } from 'react-i18next';
@@ -20,17 +18,23 @@ const DriverItem = () => {
   const dispatch = useDispatch();
   const drivers = useSelector(getDrivers);
 
-  const [currentDriver, setCurrentDriver] = useState({});
+  const [currentDriver, setCurrentDriver] = useState({
+    id: 0,
+    first_name: '',
+    last_name: '',
+    status: {
+      title: '',
+      code: '',
+    },
+  });
 
   useEffect(() => {
     dispatch(fetchDriversRequest());
     dispatch(fetchDriverStatusesRequest());
-    
   }, [dispatch]);
 
   const [modalActive, setModalActive] = useState(false);
   const [formType, setFormType] = useState(false);
-
 
   const modifyDriver = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -39,12 +43,8 @@ const DriverItem = () => {
 
     setCurrentDriver(curDriver[0]);
 
-    // dispatch(updateDriverRequest(curDriver[0]));
-    
     setModalActive(true);
     setFormType(false);
-    
-    // dispatch(fetchDriversRequest());
   };
 
   const renderModalCar = () => {
