@@ -1,12 +1,8 @@
+import { IDriverState } from './../../interfaces/driversInterfaces';
 import { IDriver, IDriverStatus } from '../../interfaces/driversInterfaces';
-interface IState {
-  drivers: {
-    drivers: IDriver[];
-    statuses: IDriverStatus[];
-  };
-}
 
-export const getDrivers = (state: IState): IDriver[] => state.drivers.drivers;
+export const getDrivers = (state: IDriverState): IDriver[] =>
+  state.drivers.drivers;
 
-export const getDriverStatuses = (state: IState): IDriverStatus[] =>
+export const getDriverStatuses = (state: IDriverState): IDriverStatus[] =>
   state.drivers.statuses;

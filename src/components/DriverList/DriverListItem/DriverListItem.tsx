@@ -2,33 +2,50 @@ import { useEffect, useState } from 'react';
 import styles from '../DriverList.module.scss';
 import sprite from '../../../icons/symbol-defs.svg';
 import Modal from '../../Modal/Modal';
-import FormDriver from '../../Form/FormDrivers';
 import FormCar from '../../Form/FormCars';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteDriverRequest,
   fetchDriversRequest,
+  fetchDriverStatusesRequest,
 } from '../../../redux/drivers/driversActions';
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
-import {Link} from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import FormUpdateDriver from '../../Form/FormUpdateDriver';
 
 const DriverItem = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const drivers = useSelector(getDrivers);
 
+  const [currentDriver, setCurrentDriver] = useState({
+    id: 0,
+    first_name: '',
+    last_name: '',
+    status: {
+      title: '',
+      code: '',
+    },
+  });
+
   useEffect(() => {
     dispatch(fetchDriversRequest());
+    dispatch(fetchDriverStatusesRequest());
   }, [dispatch]);
 
 
   const [modalActive, setModalActive] = useState(false);
   const [formType, setFormType] = useState(false);
-  const [type, setType] = useState(false);
 
-  const renderModalDriver = () => {
+  const modifyDriver = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    const currentDriverId = Number(event.currentTarget.id);
+    const curDriver = drivers.filter(driver => driver.id === currentDriverId);
+
+    setCurrentDriver(curDriver[0]);
+
     setModalActive(true);
     setFormType(false);
-    setType(true);
   };
 
   const renderModalCar = () => {
@@ -37,6 +54,7 @@ const DriverItem = () => {
   };
 
   const handlerDeleteBtn = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     const driverId = Number(event.currentTarget.id);
 
     dispatch(deleteDriverRequest(driverId));
@@ -53,12 +71,16 @@ const DriverItem = () => {
             {driver.first_name + ' '}
             {driver.last_name}
           </p>
-          <p>{driver.date_birth}</p>
-          <p>{driver.date_created}</p>
+          <p>{new Date(driver.date_birth).toLocaleDateString()}</p>
+          <p>{new Date(driver.date_created).toLocaleDateString()}</p>
           <p>{driver.status.title}</p>
 
           <div>
-            <button className={styles.ico__btn} onClick={renderModalDriver}>
+            <button
+              id={driver.id.toString()}
+              className={styles.ico__btn}
+              onClick={modifyDriver}
+            >
               <svg className={styles.icon}>
                 <use href={sprite + '#icon-TypeEdit'} />
               </svg>
@@ -90,12 +112,19 @@ const DriverItem = () => {
             <svg className={styles.icon__create}>
               <use href={sprite + '#icon-TypeAdd'} />
             </svg>
-            <p>Авто</p>
+            <p>{t('button_add_car')}</p>
           </button>
         </li>
       ))}
       <Modal active={modalActive} setActive={setModalActive}>
-        {formType ? <FormCar /> : <FormDriver active={type} />}
+        {formType ? (
+          <FormCar setActive={setModalActive} />
+        ) : (
+          <FormUpdateDriver
+            setActive={setModalActive}
+            currentDriver={currentDriver}
+          />
+        )}
       </Modal>
     </>
   );

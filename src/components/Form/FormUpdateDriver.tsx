@@ -1,15 +1,31 @@
 import styles from './FormMain.module.scss';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { createDriverRequest } from '../../redux/drivers/driversActions';
+import {
+  fetchDriverStatusesRequest,
+  updateDriverRequest,
+} from '../../redux/drivers/driversActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDriverStatuses } from '../../redux/drivers/driversSelectors';
-import { IDriverStatus, IFormDriver } from '../../interfaces/driversInterfaces';
+import {
+  IDriver,
+  IDriverStatus,
+  IUpdatedDriver,
+} from '../../interfaces/driversInterfaces';
 
-const FormDriver = ({
+// interface IDriver {
+//   id: number;
+//   first_name: string;
+//   last_name: string;
+//   status: IDriverStatus;
+// }
+
+const FormUpdateDriver = ({
   setActive,
+  currentDriver,
 }: {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  currentDriver: Partial<IDriver>;
 }) => {
   const dispatch = useDispatch();
   const statuses = useSelector(getDriverStatuses);
@@ -26,30 +42,33 @@ const FormDriver = ({
     });
   };
 
-  const addDriver = (data: IFormDriver) => {
-    const driver = {
+  const initialCurrentDriver: IUpdatedDriver = {
+    id: 0,
+    first_name: '',
+    last_name: '',
+    status: '',
+  };
+
+  const updateCurrentDriver = (data: IUpdatedDriver) => {
+    const newDriver = {
+      id: currentDriver.id,
       first_name: data.first_name,
       last_name: data.last_name,
-      date_birth: Date.parse(data.date_birth),
       status: getFullDriverStatus(data.status),
     };
 
-    dispatch(createDriverRequest(driver));
-    
+    dispatch(updateDriverRequest(newDriver));
   };
 
   const formik = useFormik({
-    initialValues: {
-      first_name: '',
-      last_name: '',
-      date_birth: '',
-      status: '',
-    },
+    initialValues: initialCurrentDriver,
 
     onSubmit: values => {
-      addDriver(values);
+      updateCurrentDriver(values);
       formik.resetForm();
       setActive(false);
+
+      dispatch(fetchDriverStatusesRequest());
     },
   });
 
@@ -59,10 +78,9 @@ const FormDriver = ({
         {t('driver_name')}
         <input
           className={styles.form_input}
-          required
           type="text"
           name="first_name"
-          placeholder=" "
+          placeholder={currentDriver.first_name}
           pattern="[A-ZА-Я]{1}[a-zа-я]{1,15}"
           onChange={formik.handleChange}
           value={formik.values.first_name}
@@ -72,37 +90,24 @@ const FormDriver = ({
         {t('driver_surname')}
         <input
           className={styles.form_input}
-          required
           type="text"
           name="last_name"
-          placeholder=" "
+          placeholder={currentDriver.last_name}
           pattern="[A-ZА-Я]{1}[a-zа-я]{1,15}"
           onChange={formik.handleChange}
           value={formik.values.last_name}
         />
       </label>
       <label>
-        {t('driver_birth')}
-        <input
-          required
-          type="date"
-          name="date_birth"
-          min="1970-01-01"
-          max="2004-01-01"
-          onChange={formik.handleChange}
-          value={formik.values.date_birth}
-        />
-      </label>
-      <label>
         {t('driver_status')}
         <select
           name="status"
-          required
           onChange={formik.handleChange}
           value={formik.values.status}
         >
-          <option disabled value="" label=""></option>
-
+          <option disabled value="" label="">
+            {currentDriver.status?.title}
+          </option>
           {statuses.map((status: IDriverStatus, index) => (
             <option key={index} value={status.code}>
               {status.title}
@@ -111,10 +116,10 @@ const FormDriver = ({
         </select>
       </label>
       <button className={styles.open__btn} type="submit">
-        {t('button_create')}
+        {t('button_edit')}
       </button>
     </form>
   );
 };
 
-export default FormDriver;
+export default FormUpdateDriver;
