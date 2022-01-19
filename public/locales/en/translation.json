@@ -23,5 +23,7 @@
   "button_add_car": "Car",
   "button_send": "Submit",
   "button_create": "Create",
-  "button_edit": "Edit"
+  "button_edit": "Edit",
+  "title_logo": "Taxi park",
+  "alt_logo": "Taxi park logo"
 }

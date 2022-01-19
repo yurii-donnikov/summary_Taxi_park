@@ -23,5 +23,7 @@
   "button_add_car": "Авто",
   "button_send": "Отправить",
   "button_create": "Создать",
-  "button_edit": "Изменить"
+  "button_edit": "Изменить",
+  "title_logo": "Парк такси",
+  "alt_logo": "Логотип парка такси"
 }

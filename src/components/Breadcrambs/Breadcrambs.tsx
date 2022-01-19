@@ -1,18 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from '../Header/Header.module.scss';
-import {
-  faHome,
-  faAngleRight,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import sprite from '../../icons/symbol-defs.svg';
 import { useTranslation } from 'react-i18next';
+interface PropsBreadcrambs{
+category: string,
+icon: React.SVGAttributes<SVGUseElement>,
+}
 let angleRight = '>';
-
-function BreadcrambsDrivers() {
-  const { t, i18n } = useTranslation();
+function BreadcrambsCars(props: PropsBreadcrambs) {
+  const { t } = useTranslation();
   return (
     <div className={styles.section}>
       <div className={styles.container}>
@@ -23,16 +20,13 @@ function BreadcrambsDrivers() {
                 <use href={sprite + '#icon-TypeHome'} />
               </svg>
               <NavLink to="/">
-                {t('breadcrembs_main')} {angleRight}
+              {t('breadcrembs_main')} {angleRight}
               </NavLink>
             </li>
-
             <li className={styles.current}>
-              <svg className={styles.icon}>
-                <use href={sprite + '#icon-TypeUsers'} />
-              </svg>
+              {props.icon}
               <NavLink to="" className={styles.current}>
-                {t('breadcrembs_drivers')}
+                {props.category}
               </NavLink>
             </li>
           </ul>
@@ -43,4 +37,4 @@ function BreadcrambsDrivers() {
   );
 }
 
-export default BreadcrambsDrivers;
+export default BreadcrambsCars;
