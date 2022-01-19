@@ -23,7 +23,7 @@ import {
   fetchDrivers,
   fetchDriverStatuses,
   updateDriver,
-} from '../../components/apiService/apiDrivers';
+} from '../../services/api/apiDrivers';
 
 interface IParams<T> {
   type: string;

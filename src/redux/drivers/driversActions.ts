@@ -20,7 +20,6 @@ export const fetchDriversError = <P>(data: P): IAction<P> => ({
 
 export const fetchDriverStatusesRequest = <P>(): IAction<P> => ({
   type: type.FETCH_DRIVER_STATUSES_REQUEST,
-  
 });
 
 export const fetchDriverStatusesSuccess = <P>(data: P): IAction<P> => ({
@@ -32,7 +31,7 @@ export const fetchDriverStatusesError = <P>(data: P): IAction<P> => ({
   type: type.FETCH_DRIVER_STATUSES_ERROR,
   payload: data,
 });
- 
+
 export const createDriverRequest = <P>(data: P): IAction<P> => ({
   type: type.CREATE_DRIVER_REQUEST,
   payload: data,

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import CarList from '../../components/CarsList/CarList';
 import { useTranslation } from 'react-i18next';

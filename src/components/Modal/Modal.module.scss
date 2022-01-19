@@ -1,58 +1,58 @@
 .modal {
-    display: none;
+  display: none;
 
-    &__active {
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba($color: #000000, $alpha: 0.4);
-        z-index: 100;
-    }
+  &__active {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba($color: #000000, $alpha: 0.4);
+    z-index: 100;
+  }
 
-    &__content {
-        padding: 40px;
-        border-radius: 8px;
-        min-height: 50vh;
-        background-color: white;
-        display: flex;
-    }
+  &__content {
+    padding: 40px;
+    border-radius: 8px;
+    min-height: 50vh;
+    background-color: white;
+    display: flex;
+  }
 }
 
 .modal__form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 
-    input {
-        width: 30vw;
-        padding: 5px;
-        margin-bottom: 20px;
-        border-radius: 4px;
+  input {
+    width: 30vw;
+    padding: 5px;
+    margin-bottom: 20px;
+    border-radius: 4px;
 
-        border-width: 1px;
-    }
+    border-width: 1px;
+  }
 
-    select {
+  select {
     width: max-content;
     padding: 5px;
     margin-bottom: 20px;
     border-radius: 4px;
     background-color: white;
-    }
+  }
 
-    label {
-        display: flex;
-        flex-direction: column;
-    }
+  label {
+    display: flex;
+    flex-direction: column;
+  }
 
-    .open__btn {
-        margin: 5px 10px;
-        padding: 15px;
-        background-color: skyblue;
-    }
+  .open__btn {
+    margin: 5px 10px;
+    padding: 15px;
+    background-color: skyblue;
+  }
 }

@@ -1,40 +1,40 @@
 .modal__form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 
-    .form_input {
-        width: 30vw;
-        padding: 5px;
-        margin-bottom: 20px;
-        border-radius: 4px;
-        border-width: 1px;
-    }
+  .form_input {
+    width: 30vw;
+    padding: 5px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border-width: 1px;
+  }
 
-    select {
+  select {
     width: max-content;
     padding: 5px;
     margin-bottom: 20px;
     border-radius: 4px;
     background-color: white;
-        &:hover {
-            cursor: pointer;
-        }
+    &:hover {
+      cursor: pointer;
     }
+  }
 
-    label {
-        display: flex;
-        flex-direction: column;
-    }
+  label {
+    display: flex;
+    flex-direction: column;
+  }
 
-    .open__btn {
-        margin: 5px 10px;
-        padding: 15px;
-        background-color: skyblue;
-        &:hover {
-            cursor: pointer;
-            background-color: rgb(0, 183, 255);
-            color: #fff;
-        }
+  .open__btn {
+    margin: 5px 10px;
+    padding: 15px;
+    background-color: skyblue;
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(0, 183, 255);
+      color: #fff;
     }
+  }
 }

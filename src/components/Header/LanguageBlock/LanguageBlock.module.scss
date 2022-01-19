@@ -8,19 +8,19 @@
   cursor: pointer;
 }
 .wrapper label {
-   margin-right: 10px;
- }
+  margin-right: 10px;
+}
 .wrapper label:last-child {
   margin-right: 0;
 }
 .wrapper svg {
   display: none;
-  transition: all .05s ease;
+  transition: all 0.05s ease;
 }
 .wrapper svg:hover {
   transform: scale(1.1);
 }
-.wrapper .langImg{
-width: 30px;
-border-radius: 50px;
+.wrapper .langImg {
+  width: 30px;
+  border-radius: 50px;
 }

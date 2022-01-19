@@ -1,15 +1,6 @@
-import { ICar, IStatusCar } from '../../interfaces/carsInterfaces';
-interface IState {
-  cars: {
-    cars: ICar[];
-    
-    statuses: IStatusCar[];
-  };
-}
+import { ICar, IStatusCar, ICarState } from '../../interfaces/carsInterfaces';
 
-export const getCars = (state: IState): ICar[] => state.cars.cars;
+export const getCars = (state: ICarState): ICar[] => state.cars.cars;
 
-
-
-export const getCarsStatuses = (state: IState): IStatusCar[] =>
+export const getCarsStatuses = (state: ICarState): IStatusCar[] =>
   state.cars.statuses;

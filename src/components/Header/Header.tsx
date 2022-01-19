@@ -1,7 +1,6 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './Header.module.scss';
 import { useTranslation } from 'react-i18next';
+import styles from './Header.module.scss';
 import { LanguageBlock } from './LanguageBlock/LanguageBlock';
 import { Path } from '../../constants/path';
 
