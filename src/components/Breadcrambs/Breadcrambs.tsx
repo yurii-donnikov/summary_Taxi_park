@@ -1,10 +1,13 @@
 import { NavLink } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import styles from '../Header/Header.module.scss';
-import sprite from '../../assets/icons/symbol-defs.svg';
-
+import sprite from '../../icons/symbol-defs.svg';
+import { useTranslation } from 'react-i18next';
+interface PropsBreadcrambs{
+category: string,
+icon: React.SVGAttributes<SVGUseElement>,
+}
 let angleRight = '>';
-function BreadcrambsCars() {
+function BreadcrambsCars(props: PropsBreadcrambs) {
   const { t } = useTranslation();
   return (
     <div className={styles.section}>
@@ -16,15 +19,13 @@ function BreadcrambsCars() {
                 <use href={sprite + '#icon-TypeHome'} />
               </svg>
               <NavLink to="/">
-                {t('breadcrembs_main')} {angleRight}
+              {t('breadcrembs_main')} {angleRight}
               </NavLink>
             </li>
             <li className={styles.current}>
-              <svg className={styles.icon}>
-                <use href={sprite + '#icon-car-solid'} />
-              </svg>
+              {props.icon}
               <NavLink to="" className={styles.current}>
-                {t('breadcrembs_car')}
+                {props.category}
               </NavLink>
             </li>
           </ul>
