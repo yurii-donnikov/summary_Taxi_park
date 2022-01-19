@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import styles from '../CarList.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import styles from '../CarList.module.scss';
+import { useParams } from 'react-router-dom';
 import { getCars } from '../../../redux/cars/carsSelectors';
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
 import {
@@ -9,10 +10,7 @@ import {
   deleteCarRequest,
 } from '../../../redux/cars/carsActions';
 import { fetchDriversRequest } from '../../../redux/drivers/driversActions';
-// import CarsTable from './CarsTable';
-import { useParams } from 'react-router-dom';
-
-import sprite from '../../../icons/symbol-defs.svg';
+import sprite from '../../../assets/icons/symbol-defs.svg';
 
 const CarItem = () => {
   const dispatch = useDispatch();
@@ -47,22 +45,23 @@ const CarItem = () => {
               <p>{car.id}</p>
               <p title={driver.status.title} key={driver.id}>
                 {driver.first_name + ' ' + driver.last_name}
-                <p>{car.model}</p>
-                <p>{car.mark}</p>
-                <p>{car.year}</p>
-                <p>{car.number}</p>
-                <p>{car.status.title}</p>
-                <button id={car.id.toString()} onClick={handlerDeleteBtn}>
-                  <svg className={styles.icon}>
-                    {' '}
-                    <use href={sprite + '#icon-TypeDendie'} />{' '}
-                  </svg>
-                </button>
               </p>
+              <p>{car.model}</p>
+              <p>{car.mark}</p>
+              <p>{car.year}</p>
+              <p>{car.number}</p>
+              <p>{car.status.title}</p>
+              <button id={car.id.toString()} onClick={handlerDeleteBtn}>
+                <svg className={styles.icon}>
+                  {' '}
+                  <use href={sprite + '#icon-TypeDendie'} />{' '}
+                </svg>
+              </button>
             </li>
           )),
       )}
     </>
   );
 };
+
 export default CarItem;

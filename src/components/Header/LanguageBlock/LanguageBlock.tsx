@@ -1,10 +1,10 @@
 import { ChangeEvent } from 'react';
 import i18next from 'i18next';
 import classes from './LanguageBlock.module.scss';
-import ru from '../../../icons/ru.png';
-import en from '../../../icons/en.png';
-import de from '../../../icons/de.png';
-import ua from '../../../icons/ua.png';
+import ru from '../../../assets/icons/ru.png';
+import en from '../../../assets/icons/en.png';
+import de from '../../../assets/icons/de.png';
+import ua from '../../../assets/icons/ua.png';
 
 export const LanguageBlock = () => {
   const onChangeLanguage = (event: ChangeEvent<HTMLInputElement>) => {
@@ -14,16 +14,16 @@ export const LanguageBlock = () => {
   return (
     <div className={classes.wrapper}>
       <label htmlFor="ru">
-        <img src={ru} className={classes.langImg} />
+        <img src={ru} className={classes.langImg} alt="" />
       </label>
       <label htmlFor="en">
-        <img src={en} className={classes.langImg} />
+        <img src={en} className={classes.langImg} alt="" />
       </label>
       <label htmlFor="de">
-        <img src={de} className={classes.langImg} />
+        <img src={de} className={classes.langImg} alt="" />
       </label>
       <label htmlFor="ua">
-        <img src={ua} className={classes.langImg} />
+        <img src={ua} className={classes.langImg} alt="" />
       </label>
       <input
         className={classes.radio}

@@ -1,11 +1,10 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './Header.module.scss';
 import { useTranslation } from 'react-i18next';
+import styles from './Header.module.scss';
 import { LanguageBlock } from './LanguageBlock/LanguageBlock';
 
 function Header() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <>
       <header>
@@ -14,7 +13,7 @@ function Header() {
             <img src="./logo-taxi.svg" title="Taxi park" alt="Taxi park logo" />
           </NavLink>
           <nav className={styles.menu}>
-            <ul role="list">
+            <ul>
               <li>
                 <NavLink to="/drivers">{t('header_driver')}</NavLink>
               </li>

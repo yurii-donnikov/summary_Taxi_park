@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from '../DriverList.module.scss';
-import sprite from '../../../icons/symbol-defs.svg';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import sprite from '../../../assets/icons/symbol-defs.svg';
 import Modal from '../../Modal/Modal';
 import FormCar from '../../Form/FormCars';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteDriverRequest,
   fetchDriversRequest,
   fetchDriverStatusesRequest,
 } from '../../../redux/drivers/driversActions';
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
-import { useTranslation } from 'react-i18next';
 import FormUpdateDriver from '../../Form/FormUpdateDriver';
-import { Link } from 'react-router-dom';
 import { fetchCarStatusesRequest } from '../../../redux/cars/carsActions';
 
 const DriverItem = () => {
@@ -57,7 +57,6 @@ const DriverItem = () => {
     dispatch(fetchCarStatusesRequest());
 
     setCurrentDriverId(currentDriverId);
-
 
     setModalActive(true);
     setFormType(true);
@@ -127,7 +126,10 @@ const DriverItem = () => {
       ))}
       <Modal active={modalActive} setActive={setModalActive}>
         {formType ? (
-          <FormCar setActive={setModalActive} currentDriverId={currentDriverId} />
+          <FormCar
+            setActive={setModalActive}
+            currentDriverId={currentDriverId}
+          />
         ) : (
           <FormUpdateDriver
             setActive={setModalActive}

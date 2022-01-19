@@ -1,20 +1,10 @@
 import { useFormik } from 'formik';
-import styles from './FormMain.module.scss';
-// import { statuses } from '../carBase/CarBase';
 import { useTranslation } from 'react-i18next';
-import { getCarsStatuses } from '../../redux/cars/carsSelectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { IStatusCar } from '../../interfaces/carsInterfaces';
+import styles from './FormMain.module.scss';
+import { getCarsStatuses } from '../../redux/cars/carsSelectors';
+import { IFormCar, IStatusCar } from '../../interfaces/carsInterfaces';
 import { createCarRequest } from '../../redux/cars/carsActions';
-
-interface IFormCar {
-  driver_id: number;
-  mark: string;
-  model: string;
-  year: number;
-  number: string;
-  status: string;
-}
 
 const FormCar = ({
   setActive,
@@ -124,7 +114,7 @@ const FormCar = ({
         />
       </label>
       <label>
-      Статус
+        Статус
         <select
           name="status"
           required

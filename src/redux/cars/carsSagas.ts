@@ -1,24 +1,19 @@
-import { createCarSuccess, fetchCarStatusesSuccess } from './carsActions';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { createCarSuccess, fetchCarStatusesSuccess } from './carsActions';
 import { ActionTypesCar } from '../cars/carsTypes';
-import { ICar, IStatusCar } from '../../interfaces/carsInterfaces';
+import { ICar, IStatusCar, IParams } from '../../interfaces/carsInterfaces';
 import {
   fetchCars,
   deleteCar,
   fetchCarsByIdDriver,
   fetchCarsStatuses,
   createCar,
-} from '../../components/apiService/apiCars';
+} from '../../services/api/apiCars';
 import {
   deleteCarSuccess,
   fetchCarsSuccess,
   fetchCarsByIdDriverSuccess,
 } from '../cars/carsActions';
-
-interface IParams<T> {
-  type: string;
-  payload: T;
-}
 
 function* fetchCarsWorker() {
   try {
@@ -49,9 +44,7 @@ function* fetchCarsStatusWorker() {
   } catch {}
 }
 
-function* createCarWorker<T extends ICar>({
-  payload,
-}: IParams<T>): Generator {
+function* createCarWorker<T extends ICar>({ payload }: IParams<T>): Generator {
   try {
     const car = (yield call(createCar, payload)) as ICar;
     yield put(createCarSuccess(car));

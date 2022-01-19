@@ -1,19 +1,19 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import DriverItem from './DriverListItem/DriverListItem';
 import Modal from '../Modal/Modal';
 import styles from './DriverList.module.scss';
-import sprite from '../../icons/symbol-defs.svg';
+import sprite from '../../assets/icons/symbol-defs.svg';
 import FormDriver from '../Form/FormDrivers';
-import { useTranslation } from 'react-i18next';
 
 const DriverList = () => {
   const { t } = useTranslation();
   const [modalActive, setModalActive] = useState(false);
-  const [formType, setFormType] = useState(false);
+  // const [formType, setFormType] = useState(false);
 
   const renderModalDriver = () => {
     setModalActive(true);
-    setFormType(false);
+    // setFormType(false);
   };
 
   return (
