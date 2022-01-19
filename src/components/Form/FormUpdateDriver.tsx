@@ -1,24 +1,17 @@
-import styles from './FormMain.module.scss';
 import { useFormik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import styles from './FormMain.module.scss';
 import {
   fetchDriverStatusesRequest,
   updateDriverRequest,
 } from '../../redux/drivers/driversActions';
-import { useDispatch, useSelector } from 'react-redux';
 import { getDriverStatuses } from '../../redux/drivers/driversSelectors';
 import {
   IDriver,
   IDriverStatus,
   IUpdatedDriver,
 } from '../../interfaces/driversInterfaces';
-
-// interface IDriver {
-//   id: number;
-//   first_name: string;
-//   last_name: string;
-//   status: IDriverStatus;
-// }
 
 const FormUpdateDriver = ({
   setActive,
@@ -106,6 +99,7 @@ const FormUpdateDriver = ({
           value={formik.values.status}
         >
           <option disabled value="" label="">
+
             {currentDriver.status?.title}
           </option>
           {statuses.map((status: IDriverStatus, index) => (

@@ -1,8 +1,8 @@
-import styles from './FormMain.module.scss';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { createDriverRequest } from '../../redux/drivers/driversActions';
 import { useDispatch, useSelector } from 'react-redux';
+import styles from './FormMain.module.scss';
+import { createDriverRequest } from '../../redux/drivers/driversActions';
 import { getDriverStatuses } from '../../redux/drivers/driversSelectors';
 import { IDriverStatus, IFormDriver } from '../../interfaces/driversInterfaces';
 
@@ -35,7 +35,6 @@ const FormDriver = ({
     };
 
     dispatch(createDriverRequest(driver));
-    
   };
 
   const formik = useFormik({

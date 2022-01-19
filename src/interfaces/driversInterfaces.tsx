@@ -33,7 +33,6 @@ export interface IActionUpdateDriver {
   newDriver: IUpdatedDriver;
 }
 
-// ====
 export interface IUpdatedDriver {
   id: number;
   first_name: string;
@@ -41,12 +40,9 @@ export interface IUpdatedDriver {
   status: string;
 }
 
-
-// 
 export interface IFormDriver {
   first_name: string;
   last_name: string;
   date_birth: string;
-  status: string ;
+  status: string;
 }
-

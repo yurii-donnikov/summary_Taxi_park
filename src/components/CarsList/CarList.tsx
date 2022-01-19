@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import styles from './CarList.module.scss';
-import Modal from '../Modal/Modal';
-import sprite from '../../icons/symbol-defs.svg';
 import { useTranslation } from 'react-i18next';
+import styles from './CarList.module.scss';
 import CarItem from './CarsListItem/CarItem';
 
 const CarList = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div className={styles.list__contsiner}>
       <ul className={styles.list__header}>

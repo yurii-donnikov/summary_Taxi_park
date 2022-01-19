@@ -20,7 +20,6 @@ export const UPDATE_DRIVER_REQUEST = 'drivers/updateDriverRequest';
 export const UPDATE_DRIVER_SUCCESS = 'drivers/updateDriverSuccess';
 export const UPDATE_DRIVER_ERROR = 'drivers/updateDriverError';
 
-//
 export const FETCH_CARS_STATUSES_REQUEST = 'cars/fetchCarsStatusesRequest';
 export const FETCH_CARS_STATUSES_SUCCESS = 'cars/fetchCarsStatusesSuccess';
 export const FETCH_CARS_STATUSES_ERROR = 'cars/fetchCarsStatusesError';

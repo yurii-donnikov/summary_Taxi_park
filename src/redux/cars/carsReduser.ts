@@ -1,15 +1,9 @@
-import { IAction, ICar, IStatusCar } from '../../interfaces/carsInterfaces';
+import { ICarsState, IAction } from './../../interfaces/carsInterfaces';
 import { ActionTypesCar } from '../cars/carsTypes';
 
-type State = {
-  cars: ICar[];
-  statuses: IStatusCar[];
-};
-
-const initialState: State = {
+const initialState: ICarsState = {
   cars: [],
   statuses: [],
-
 };
 
 const carsReduser = (state = initialState, action: IAction) => {

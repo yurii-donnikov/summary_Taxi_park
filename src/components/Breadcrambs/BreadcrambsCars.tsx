@@ -1,14 +1,11 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from '../Header/Header.module.scss';
-import { faHome, faAngleRight, faCar } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import sprite from '../../icons/symbol-defs.svg';
 import { useTranslation } from 'react-i18next';
+import styles from '../Header/Header.module.scss';
+import sprite from '../../assets/icons/symbol-defs.svg';
 
 let angleRight = '>';
 function BreadcrambsCars() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div className={styles.section}>
       <div className={styles.container}>
