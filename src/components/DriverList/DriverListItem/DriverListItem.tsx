@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from '../DriverList.module.scss';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import styles from '../DriverList.module.scss';
 import sprite from '../../../assets/icons/symbol-defs.svg';
 import Modal from '../../Modal/Modal';
 import FormCar from '../../Form/FormCars';

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from '../CarList.module.scss';
 import { useParams } from 'react-router-dom';
+import styles from '../CarList.module.scss';
 import { getCars } from '../../../redux/cars/carsSelectors';
 import { getDrivers } from '../../../redux/drivers/driversSelectors';
 import {

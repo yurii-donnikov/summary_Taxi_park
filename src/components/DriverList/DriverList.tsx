@@ -9,11 +9,9 @@ import FormDriver from '../Form/FormDrivers';
 const DriverList = () => {
   const { t } = useTranslation();
   const [modalActive, setModalActive] = useState(false);
-  // const [formType, setFormType] = useState(false);
 
   const renderModalDriver = () => {
     setModalActive(true);
-    // setFormType(false);
   };
 
   return (
