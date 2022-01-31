@@ -11,6 +11,7 @@ export interface IDriver {
   date_birth: number;
   status: IDriverStatus;
 }
+
 export interface IDriverState {
   drivers: {
     drivers: IDriver[];
